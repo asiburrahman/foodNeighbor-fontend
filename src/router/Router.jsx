@@ -18,6 +18,7 @@ import UpdateTask from "../component/Pages/UpdateTask";
 import AddFood from "../component/Pages/AddFood";
 import BrowseFood from "../component/Pages/BrowseTask";
 import FoodDetails from "../component/Pages/FoodDetails";
+import MyRequestedFood from "../component/Pages/MyRequestedFood";
   
   const router = createBrowserRouter([
     {
@@ -56,6 +57,13 @@ import FoodDetails from "../component/Pages/FoodDetails";
         {
           path: '/addFood',
           element: <PrivetRoutes><AddFood></AddFood></PrivetRoutes>
+        },
+
+        {
+          path: '/myRequestedFood',
+          element: <PrivetRoutes><MyRequestedFood></MyRequestedFood></PrivetRoutes>,
+          
+          
         },
 
         {
