@@ -5,7 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { AuthContext } from '../../context/AuthContext';
 import Swal from 'sweetalert2';
 
-const AddTask = () => {
+const AddFood = () => {
     const [startDate, setStartDate] = useState(new Date());
     const { user } = use(AuthContext)
     console.log(user);
@@ -18,7 +18,11 @@ const AddTask = () => {
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
         const date = startDate.toLocaleDateString("en-CA");
-        const userData = { date, ...data }
+        const displayName = user.displayName
+        const email = user.email
+        const photoURL = user.photoURL
+        const foodStatus = 'Available'
+        const userData = {displayName, email, photoURL, foodStatus, date, ...data }
         console.log(userData);
 
 
@@ -59,53 +63,62 @@ const AddTask = () => {
                         { /* Task Title */}
                         <div className="form-control md:w-1/2 mx-auto">
                             <label className="label">
-                                <span className="label-text font-bold">Title</span>
+                                <span className="label-text font-bold">Food Name</span>
                             </label>
                             <input
                                 type="text"
-                                name="title"
-                                placeholder="Title"
+                                name="foodName"
+                                placeholder="Food Name"
+                                className="input input-bordered w-full"
+                                required
+                            />
+                        </div>
+                         <div className="form-control md:w-1/2 mx-auto">
+                            <label className="label">
+                                <span className="label-text font-bold">Food Image</span>
+                            </label>
+                            <input
+                                type="text"
+                                name="foodImage"
+                                placeholder="Food Image"
                                 className="input input-bordered w-full"
                                 required
                             />
                         </div>
 
-                        {/* Category  */}
+                        {/* Quantity  */}
                         <div className="form-control md:w-1/2 mx-auto">
                             <label className="label">
-                                <span className="label-text font-bold">Category</span>
+                                <span className="label-text font-bold">Food Quantity</span>
                             </label>
-
-                            <select className="input input-bordered w-full" name="category" id="day">
-                                <option value="Web Development">Web Development</option>
-                                <option value="Graphics Design">Graphics Design</option>
-                                <option value="Content Writing">Content Writing</option>
-                                <option value="Digital Marketing">Digital Marketing</option>
-                                <option value="Video Editing">Video Editing</option>
-                                <option value="UI/UX design">UI/UX design</option>
-                                <option value="Internet of Things Solutions">IoT (Internet of Things) Solutions</option>
-                            </select>
+                            <input
+                                type="text"
+                                name="foodQuantity"
+                                placeholder="Food Quantity"
+                                className="input input-bordered w-full"
+                                required
+                            />
                         </div>
 
-                        {/* Description */}
+                        {/* PickUp Location */}
                         <div className="form-control md:w-1/2 mx-auto">
                             <label className="label">
-                                <span className="label-text font-bold">Description</span>
+                                <span className="label-text font-bold">PickUp Location</span>
                             </label>
                             <textarea
                                 type="text"
-                                name="description"
-                                placeholder="Description"
+                                name="foodLocation"
+                                placeholder="PickUp Location"
                                 className="input input-bordered w-full h-20"
                                 required
                             />
                         </div>
 
 
-                        {/* Deadline */}
+                        {/* Expired Date */}
                         <div className="form-control lg:w-1/2 mt-6 md:mt-0 mx-auto">
                             <label className="label font-bold">
-                                <span className="label-text">Deadline</span>
+                                <span className="label-text">Expired Date</span>
                             </label>
                             <DatePicker
                                 className="input input-bordered w-full"
@@ -114,52 +127,23 @@ const AddTask = () => {
                             />
                         </div>
 
-
-                        {/* Budget  */}
-
+                        {/* Additional Notes */}
                         <div className="form-control md:w-1/2 mx-auto">
                             <label className="label">
-                                <span className="label-text font-bold">Budget</span>
+                                <span className="label-text font-bold">Additional Notes</span>
                             </label>
-                            <input
-                                type="number"
-                                name="budget"
-                                placeholder="Price"
-                                className="input input-bordered w-full"
+                            <textarea
+                                type="text"
+                                name="foodNotes"
+                                placeholder="Additional Notes"
+                                className="input input-bordered w-full h-20"
                                 required
                             />
                         </div>
 
-                        {/* User Name  */}
-                        <div className="form-control md:w-1/2 mx-auto">
-                            <label className="label">
-                                <span className="label-text font-bold">User Name</span>
-                            </label>
-                            <input
-                                type="Text"
-                                name="name"
-                                value={user.displayName}
-                                placeholder="User Name"
-                                className="input input-bordered w-full"
-                                required
-                            />
-                        </div>
+                        
 
-                        {/* User Name  */}
-                        <div className="form-control md:w-1/2 mx-auto">
-                            <label className="label">
-                                <span className="label-text font-bold">User Mail</span>
-                            </label>
-                            <input
-                                type="Email"
-                                name="email"
-                                value={user.email}
-                                placeholder="Email"
-                                className="input input-bordered w-full"
-                                required
-                            />
-                        </div>
-
+                       
                         {/* <div className="form-control lg:w-1/2 mt-6 md:mt-0">
               <label className="label font-bold">
                 <span className="label-text">Time</span>
@@ -190,4 +174,4 @@ const AddTask = () => {
     );
 };
 
-export default AddTask;
+export default AddFood;

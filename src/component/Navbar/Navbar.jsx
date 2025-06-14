@@ -37,7 +37,7 @@ const Navbar = () => {
                   <li><NavLink to='/browseTask'>Browse Task</NavLink></li>
                   {user && <>
                              
-                             <li><NavLink to='/addTask'>Add Task</NavLink></li>
+                             <li><NavLink to='/addFood'>Add Task</NavLink></li>
                              <li><NavLink to='/myTask'>My Posted Task</NavLink></li>
                         </>
                   }

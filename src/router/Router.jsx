@@ -13,11 +13,11 @@ import PrivetRoutes from "../Routes/PrivetRoutes";
 import Error from "../component/Error/Error";
 import Loading from "../component/Loading/Loading";
 import LoginProtectedRouts from "../Routes/LoginProtectedRouts";
-import AddTask from "../component/Pages/AddTask";
 import BrowseTask from "../component/Pages/BrowseTask";
 import MyPostedTask from "../component/Pages/MyPostedTask";
 import TaskDetails from "../component/Pages/TaskDetails";
 import UpdateTask from "../component/Pages/UpdateTask";
+import AddFood from "../component/Pages/AddFood";
   
   const router = createBrowserRouter([
     {
@@ -54,8 +54,8 @@ import UpdateTask from "../component/Pages/UpdateTask";
         },
         
         {
-          path: '/addTask',
-          element: <PrivetRoutes><AddTask></AddTask></PrivetRoutes>
+          path: '/addFood',
+          element: <PrivetRoutes><AddFood></AddFood></PrivetRoutes>
         },
 
         {
