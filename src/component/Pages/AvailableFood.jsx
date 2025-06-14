@@ -7,7 +7,7 @@ const AvailableFood = ({food}) => {
         <div className="max-w-sm rounded-xl bg-base-300 overflow-hidden shadow-lg border">
               {/* Top image with heart icon */}
               <div className="relative">
-                <Link to={`/taskDetail/${food._id}`} className="absolute top-3 right-3 bg-white rounded-full p-2 shadow-md hover:bg-red-100">
+                <Link to={`/FoodDetails/${food._id}`} className="absolute top-3 right-3 bg-white rounded-full p-2 shadow-md hover:bg-red-100">
                   
                   See Details
                 </Link>
@@ -43,7 +43,10 @@ const AvailableFood = ({food}) => {
                 </div>
         
                 {/* Price */}
-                
+                <div className="flex items-center text-sm gap-2 mt-2">
+                  
+                 <p className='font-semibold'>Food Status: </p> <span className='p-2 rounded-3xl font-bold bg-accent'>{food.foodStatus}</span>
+                </div>
               </div>
             </div>
     );

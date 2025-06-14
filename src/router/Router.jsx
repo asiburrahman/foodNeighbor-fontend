@@ -14,10 +14,10 @@ import Error from "../component/Error/Error";
 import Loading from "../component/Loading/Loading";
 import LoginProtectedRouts from "../Routes/LoginProtectedRouts";
 import MyPostedTask from "../component/Pages/MyPostedTask";
-import TaskDetails from "../component/Pages/TaskDetails";
 import UpdateTask from "../component/Pages/UpdateTask";
 import AddFood from "../component/Pages/AddFood";
 import BrowseFood from "../component/Pages/BrowseTask";
+import FoodDetails from "../component/Pages/FoodDetails";
   
   const router = createBrowserRouter([
     {
@@ -48,9 +48,9 @@ import BrowseFood from "../component/Pages/BrowseTask";
         },
 
         {
-          path:'taskDetail/:id',
-          element: <PrivetRoutes><TaskDetails></TaskDetails></PrivetRoutes>,
-          loader: ({params})=> fetch(`http://localhost:3000/taskDetail/${params.id}`)
+          path:'FoodDetails/:id',
+          element: <PrivetRoutes><FoodDetails></FoodDetails></PrivetRoutes>,
+          loader: ({params})=> fetch(`http://localhost:3000/FoodDetails/${params.id}`)
         },
         
         {
