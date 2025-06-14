@@ -13,12 +13,12 @@ import PrivetRoutes from "../Routes/PrivetRoutes";
 import Error from "../component/Error/Error";
 import Loading from "../component/Loading/Loading";
 import LoginProtectedRouts from "../Routes/LoginProtectedRouts";
-import MyPostedTask from "../component/Pages/MyPostedTask";
 import UpdateTask from "../component/Pages/UpdateTask";
 import AddFood from "../component/Pages/AddFood";
 import BrowseFood from "../component/Pages/BrowseTask";
 import FoodDetails from "../component/Pages/FoodDetails";
 import MyRequestedFood from "../component/Pages/MyRequestedFood";
+import MyPostedFood from "../component/Pages/MyPostedFood";
   
   const router = createBrowserRouter([
     {
@@ -67,8 +67,8 @@ import MyRequestedFood from "../component/Pages/MyRequestedFood";
         },
 
         {
-          path: '/myTask',
-          element: <PrivetRoutes><MyPostedTask></MyPostedTask></PrivetRoutes>,
+          path: '/myPostedFood',
+          element: <PrivetRoutes><MyPostedFood></MyPostedFood></PrivetRoutes>,
           
           
         },

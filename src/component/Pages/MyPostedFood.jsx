@@ -2,26 +2,29 @@ import React, { use, useEffect, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import Loading from '../Loading/Loading';
 import Swal from 'sweetalert2';
+import MyFood from '../API/UseRequestApi';
 import { Link } from 'react-router';
+import useRequestApi from '../API/UseRequestApi';
 
-const MyPostedTask = () => {
+const MyPostedFood = () => {
     const {user, loading, setLoading} = use(AuthContext)
     const [tasks, setTask] = useState([])
+    const {MyFood} =useRequestApi();
     
+        MyFood(user.email).then(data=>setTask(data))
 
 
 
-
-    useEffect(()=>{
+    // useEffect(()=>{
                 
-                // console.log(location);
-               fetch(`http://localhost:3000/task/${user.email}`,{
-                method:"GET"
-               }).then(res=> res.json()).then(data=>setTask(data)
-               )
+    //             // console.log(location);
+    //            fetch(`http://localhost:3000/task/${user.email}`,{
+    //             method:"GET"
+    //            }).then(res=> res.json()).then(data=>setTask(data)
+    //            )
         
                 
-            },[user])
+    //         },[user])
 
             
           const  handleDelete=(id)=>{
@@ -159,4 +162,4 @@ const MyPostedTask = () => {
     );
 };
 
-export default MyPostedTask;
+export default MyPostedFood;

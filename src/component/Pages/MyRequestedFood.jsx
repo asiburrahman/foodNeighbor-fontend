@@ -1,32 +1,28 @@
 import React, { use, useEffect, useState} from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { Link } from 'react-router';
-import { myRequest } from '../API/myrequested';
+import UseRequestApi from '../API/UseRequestApi';
+// import { myRequest } from '../API/myrequested';
 
 
 
 const MyRequestedFood = () => {
     const {user} = use(AuthContext)
         const [tasks, setTask] = useState([])
-        
-
+        const {myRequestFood} =UseRequestApi();
+       
+    myRequestFood(user.email).then(data=>setTask(data))
     
     
-    
-    
-        useEffect(()=>{
+        //  useEffect(()=>{
                     
-                //     console.log(location);
-                //    fetch(`http://localhost:3000/requestFood/${user.email}`,{
-                //     method:"GET"
-                //    }).then(res=> res.json()).then(data=>setTask(data))
-                //    )
+               
 
-                 myRequest(user.email, user.accessToken).then(data=>setTask(data))
+        //          myRequest(user.email, user.accessToken).then(data=>setTask(data))
                  
             
                     
-                },[user])
+        //         },[user])
     return (
         <div>
             <div className="overflow-x-auto">
