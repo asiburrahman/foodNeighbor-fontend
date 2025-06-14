@@ -1,8 +1,8 @@
 import React from 'react';
 import { useLoaderData } from 'react-router';
-import Food from './Food';
+import AvailableFood from './AvailableFood';
 
-const BrowseTask = () => {
+const BrowseFood = () => {
     const Foods = useLoaderData()
 
 
@@ -11,7 +11,7 @@ const BrowseTask = () => {
         <div>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-11/12 mx-auto gap-2 my-7'>
                 {
-                    Foods.map((food, index) => <Food food={food} key={index}></Food>)
+                    Foods.map((food, index) => <AvailableFood food={food} key={index}></AvailableFood>)
                 }
 
             </div>
@@ -20,4 +20,4 @@ const BrowseTask = () => {
     );
 };
 
-export default BrowseTask;
+export default BrowseFood;

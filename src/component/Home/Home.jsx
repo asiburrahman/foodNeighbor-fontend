@@ -7,6 +7,7 @@ import TypewriterText from '../Typewriter/TypewriterText';
 import ReactSweper from '../Swiper/ReactSweper';
 import Food from '../Pages/Food';
 import axios from 'axios';
+import { Link } from 'react-router';
 
 
 const Home = () => {
@@ -52,9 +53,15 @@ const Home = () => {
               {
                 foods.map((food, index)=> <Food food={food} key={index}></Food>)
               }
-
+            
             </div>
-
+            <div className='p-4 mt-6 w-7/12 mx-auto text-center'>
+                  <Link to='availableFood' className=" bg-white rounded-full text-xl font-medium p-4 shadow-md hover:bg-base-300">
+          
+          Show All Food
+        </Link>
+            </div>
+                   
             <section>
 
 

@@ -34,10 +34,10 @@ const Navbar = () => {
                   <li><NavLink to='/'>Home</NavLink></li>
                   {/* { !user && <><li><NavLink to='/login'>Login</NavLink></li>
                   <li><NavLink to='/register'>Register</NavLink></li></>} */}
-                  <li><NavLink to='/availableFood'>Browse Task</NavLink></li>
+                  <li><NavLink to='/availableFood'>Available Food</NavLink></li>
                   {user && <>
                              
-                             <li><NavLink to='/addFood'>Add Task</NavLink></li>
+                             <li><NavLink to='/addFood'>Add Food</NavLink></li>
                              <li><NavLink to='/myTask'>My Posted Task</NavLink></li>
                         </>
                   }

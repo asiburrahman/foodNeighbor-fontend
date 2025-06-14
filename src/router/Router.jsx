@@ -13,11 +13,11 @@ import PrivetRoutes from "../Routes/PrivetRoutes";
 import Error from "../component/Error/Error";
 import Loading from "../component/Loading/Loading";
 import LoginProtectedRouts from "../Routes/LoginProtectedRouts";
-import BrowseTask from "../component/Pages/BrowseTask";
 import MyPostedTask from "../component/Pages/MyPostedTask";
 import TaskDetails from "../component/Pages/TaskDetails";
 import UpdateTask from "../component/Pages/UpdateTask";
 import AddFood from "../component/Pages/AddFood";
+import BrowseFood from "../component/Pages/BrowseTask";
   
   const router = createBrowserRouter([
     {
@@ -43,7 +43,7 @@ import AddFood from "../component/Pages/AddFood";
 
         {
           path:'/availableFood',
-          Component: BrowseTask,
+          Component: BrowseFood,
           loader: ()=> fetch('http://localhost:3000/availableFood')
         },
 
