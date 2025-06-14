@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import { useLoaderData } from 'react-router';
 import { AuthContext } from '../../context/AuthContext';
-import Task from './Task';
+import Task from './Food';
 import Swal from 'sweetalert2';
 
 const UpdateTask = () => {

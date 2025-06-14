@@ -42,9 +42,9 @@ import AddFood from "../component/Pages/AddFood";
         },
 
         {
-          path:'/browseTask',
+          path:'/availableFood',
           Component: BrowseTask,
-          loader: ()=> fetch('http://localhost:3000/task')
+          loader: ()=> fetch('http://localhost:3000/availableFood')
         },
 
         {

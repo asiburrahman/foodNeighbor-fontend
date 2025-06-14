@@ -3,21 +3,21 @@ import Slider from '../Slider/Slider';
 import { ToastContainer } from 'react-toastify';
 import TrustedCompanies from '../Pages/TrustedCompanies';
 import CountUp from 'react-countup';
-import Task from '../Pages/Task';
 import TypewriterText from '../Typewriter/TypewriterText';
 import ReactSweper from '../Swiper/ReactSweper';
+import Food from '../Pages/Food';
+import axios from 'axios';
 
 
 const Home = () => {
 
-    const [tasks, setTasks] = useState([])
-console.log(tasks);
+    const [foods, setFoods] = useState([])
+// console.log(tasks);
 
 
             useEffect(() => {
-  fetch('http://localhost:3000/recentTasks')
-    .then(res => res.json())
-    .then(data => setTasks(data));
+  axios('http://localhost:3000/recentTasks')
+    .then(data => setFoods(data.data));
 }, []);
     
     return (
@@ -50,7 +50,7 @@ console.log(tasks);
 
 
               {
-                tasks.map((task, index)=> <Task task={task} key={index}></Task>)
+                foods.map((food, index)=> <Food food={food} key={index}></Food>)
               }
 
             </div>

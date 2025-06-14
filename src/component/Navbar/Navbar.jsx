@@ -34,7 +34,7 @@ const Navbar = () => {
                   <li><NavLink to='/'>Home</NavLink></li>
                   {/* { !user && <><li><NavLink to='/login'>Login</NavLink></li>
                   <li><NavLink to='/register'>Register</NavLink></li></>} */}
-                  <li><NavLink to='/browseTask'>Browse Task</NavLink></li>
+                  <li><NavLink to='/availableFood'>Browse Task</NavLink></li>
                   {user && <>
                              
                              <li><NavLink to='/addFood'>Add Task</NavLink></li>
