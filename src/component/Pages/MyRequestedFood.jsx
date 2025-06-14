@@ -11,18 +11,19 @@ const MyRequestedFood = () => {
         const [tasks, setTask] = useState([])
         const {myRequestFood} =UseRequestApi();
        
-    myRequestFood(user.email).then(data=>setTask(data))
+    // 
     
     
-        //  useEffect(()=>{
+         useEffect(()=>{
                     
                
 
-        //          myRequest(user.email, user.accessToken).then(data=>setTask(data))
+                //  myRequest(user.email, user.accessToken).then(data=>setTask(data))
+                myRequestFood(user.email).then(data=>setTask(data))
                  
             
                     
-        //         },[user])
+                },[user])
     return (
         <div>
             <div className="overflow-x-auto">

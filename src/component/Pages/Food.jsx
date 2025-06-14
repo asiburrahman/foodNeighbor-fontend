@@ -25,28 +25,32 @@ const Food = ({food}) => {
             src={food.photoURL}
             alt="Ava Anderson"
           />
-          <span className="font-semibold ">{food.displayName}</span>
+          <span className="font-semibold ">{food?.displayName}</span>
           <FaCheckCircle className="text-green-500" />
         </div>
         <div className='p-3'>
-          <img className='object-cover rounded-2xl' src={food.foodImage} alt="" />
+          <img className='object-cover rounded-2xl' src={food?.foodImage} alt="" />
         </div>
 
         
         {/* Food name  */}
         <div className="flex items-center text-xl font-bold  mt-2">
           
-          <span>Food name: {food.foodName}</span>
+          <span>Food name: {food?.foodName}</span>
         </div>
      
 
         {/* Quantity */}
         <div className="flex items-center text-sm  mt-2">
           
-          <span>Quantity: {food.foodQuantity}</span>
+          <span>Quantity: {food?.foodQuantity}</span>
         </div>
 
         {/* Price */}
+        <div className="flex items-center text-sm gap-2 mt-2">
+                  
+                 <p className='font-semibold'>Food Status: </p> <span className={`p-2 rounded-3xl font-bold ${food.foodStatus === "Available" ? 'bg-accent': 'bg-secondary' }`}>{food.foodStatus}</span>
+                </div>
         
       </div>
     </div>

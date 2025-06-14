@@ -11,11 +11,11 @@ const MyPostedFood = () => {
     const [tasks, setTask] = useState([])
     const {MyFood} =useRequestApi();
     
-        MyFood(user.email).then(data=>setTask(data))
+        // MyFood(user.email).then(data=>setTask(data))
 
 
 
-    // useEffect(()=>{
+    useEffect(()=>{
                 
     //             // console.log(location);
     //            fetch(`http://localhost:3000/task/${user.email}`,{
@@ -23,8 +23,9 @@ const MyPostedFood = () => {
     //            }).then(res=> res.json()).then(data=>setTask(data)
     //            )
         
+    MyFood(user.email).then(data=>setTask(data))
                 
-    //         },[user])
+            },[user])
 
             
           const  handleDelete=(id)=>{

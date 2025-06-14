@@ -53,7 +53,7 @@ const AddFood = () => {
     return (
         <div>
             <div className=" lg:p-24 ">
-                <h2 className="text-3xl text-center font-bold">Add A Task</h2>
+                <h2 className="text-3xl text-center font-bold">Add A Food</h2>
                 <form onSubmit={handleAddTask}>
 
                     <div className="flex flex-col gap-6 w-11/12 mx-auto ">
@@ -141,31 +141,12 @@ const AddFood = () => {
                             />
                         </div>
 
-                        
-
-                       
-                        {/* <div className="form-control lg:w-1/2 mt-6 md:mt-0">
-              <label className="label font-bold">
-                <span className="label-text">Time</span>
-              </label>
-
-              <DatePicker
-                className="input input-bordered w-full"
-                selected={selectedTime}
-                onChange={handleTimeChange}
-                showTimeSelect
-                showTimeSelectOnly
-                timeIntervals={15}
-                timeCaption="Time"
-                dateFormat="h:mm aa"
-              />
-            </div> */}
                     </div>
 
                     {/* End of Labels */}
                     <input
                         type="submit"
-                        value="Add Task"
+                        value="Add Food"
                         className="btn w-full bg-pink-500 text-white mt-6"
                     />
                 </form>

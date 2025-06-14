@@ -8,9 +8,11 @@ import Swal from 'sweetalert2';
 const UpdateTask = () => {
 
     const {user} = useContext(AuthContext)
-    const loadUser = useLoaderData();
+    const loadFood = useLoaderData();
+    console.log(loadFood);
+    
 
-      const [startDate, setStartDate] = useState(new Date(loadUser.date))
+      const [startDate, setStartDate] = useState(new Date(loadFood.date))
     
     const handleUpdateTask= (e)=>{
 
@@ -22,8 +24,8 @@ const UpdateTask = () => {
         const userData = { date, ...data }
 
 
-        fetch(`http://localhost:3000/UpdateTask/${loadUser._id}`, {
-              method: 'PUT',
+        fetch(`http://localhost:3000/UpdateTask/${loadFood._id}`, {
+              method: 'PATCH',
               headers: {
                 'Content-Type': 'application/json'
               },
@@ -57,63 +59,87 @@ const UpdateTask = () => {
     return (
         
                     <div className=" lg:p-24 ">
-                        <h2 className="text-3xl text-center font-bold">Update Your Task</h2>
+                        <h2 className="text-3xl text-center font-bold">Update Your Food</h2>
                         <form onSubmit={handleUpdateTask}>
         
                             <div className="flex flex-col gap-6 w-11/12 mx-auto ">
         
         
         
-                                { /* Task Title */}
-                                <div className="form-control md:w-1/2 mx-auto">
+                                { /* Food name */}
+                                <div className="form-control md:w-4/5 mx-auto">
                                     <label className="label">
-                                        <span className="label-text font-bold">Title</span>
+                                        <span className="label-text font-bold">Food Name</span>
                                     </label>
                                     <input
                                         type="text"
-                                        name="title"
-                                        placeholder="Title"
+                                        name="foodName"
+                                        placeholder="Food Name"
                                         className="input input-bordered w-full"
                                         required
-                                        defaultValue={loadUser.title}
+                                        defaultValue={loadFood.foodName}
                                     />
                                 </div>
         
-                                {/* Category  */}
-                                <div className="form-control md:w-1/2 mx-auto">
+                                
+                                {/* Food Image */}
+                                <div className="form-control md:w-4/5 mx-auto">
                                     <label className="label">
-                                        <span className="label-text font-bold">Category</span>
+                                        <span className="label-text font-bold">Food Image</span>
                                     </label>
-        
-                                    <select defaultValue={loadUser.category} className="input input-bordered w-full" name="category" id="day">
-                                        <option value="Web Development">Web Development</option>
-                                        <option value="Graphics Design">Graphics Design</option>
-                                        <option value="Content Writing">Content Writing</option>
-                                        <option value="Digital Marketing">Digital Marketing</option>
-                                        <option value="Video Editing">Video Editing</option>
-                                        <option value="UI/UX design">UI/UX design</option>
-                                        <option value="Internet of Things Solutions">IoT (Internet of Things) Solutions</option>
-                                    </select>
-                                </div>
-        
-                                {/* Description */}
-                                <div className="form-control md:w-1/2 mx-auto">
-                                    <label className="label">
-                                        <span className="label-text font-bold">Description</span>
-                                    </label>
-                                    <textarea
+                                    {/* <textarea
                                         type="text"
                                         name="description"
                                         placeholder="Description"
                                         className="input input-bordered w-full h-20"
                                         defaultValue={loadUser.description}
                                         required
+                                    /> */}
+                                    <input
+                                        type="url"
+                                        name="foodImage"
+                                        placeholder="Food Image URL"
+                                        className="input input-bordered w-full"
+                                        defaultValue={loadFood.foodImage}
+                                        required
                                     />
                                 </div>
+
+                                 {/* Food Quantity  */}
         
-        
-                                {/* Deadline */}
-                                <div className="form-control lg:w-1/2 mt-6 md:mt-0 mx-auto">
+                                <div className="form-control md:w-4/5 mx-auto">
+                                    <label className="label">
+                                        <span className="label-text font-bold">Food Quantity</span>
+                                    </label>
+                                    <input
+                                        type="number"
+                                        name="foodQuantity"
+                                        placeholder="Food Quantity"
+                                        className="input input-bordered w-full"
+                                        defaultValue={loadFood.foodQuantity}
+                                        required
+                                    />
+                                </div>
+
+
+                                {/* PickUp Location */}
+                                    <div className="form-control md:w-4/5 mx-auto">
+                                        <label className="label">
+                                            <span className="label-text font-bold">PickUp Location</span>
+                                        </label>
+                                        <textarea
+                                            type="text"
+                                            name="foodLocation"
+                                            defaultValue={loadFood.foodLocation}
+                                            placeholder="PickUp Location"
+                                            className="input input-bordered w-full h-20"
+                                            required
+                                        />
+                                    </div>
+            
+            
+                                    {/* Expired Date */}
+                                <div className="form-control lg:w-4/5 mt-6 md:mt-0 mx-auto">
                                     <label className="label font-bold">
                                         <span className="label-text">Deadline</span>
                                     </label>
@@ -123,54 +149,24 @@ const UpdateTask = () => {
                                         defaultValue={startDate}
                                         onChange={(date) => setStartDate(date)}
                                     />
+                                    
                                 </div>
+            
+                                    {/* Additional Notes */}
+                                    <div className="form-control md:w-4/5 mx-auto">
+                                        <label className="label">
+                                            <span className="label-text font-bold">Additional Notes</span>
+                                        </label>
+                                        <textarea
+                                            type="text"
+                                            name="foodNotes"
+                                            defaultValue={loadFood.foodNotes}
+                                            placeholder="Additional Notes"
+                                            className="input input-bordered w-full h-20"
+                                            required
+                                        />
+                                    </div>
         
-        
-                                {/* Budget  */}
-        
-                                <div className="form-control md:w-1/2 mx-auto">
-                                    <label className="label">
-                                        <span className="label-text font-bold">Budget</span>
-                                    </label>
-                                    <input
-                                        type="number"
-                                        name="budget"
-                                        placeholder="Price"
-                                        className="input input-bordered w-full"
-                                        defaultValue={loadUser.budget}
-                                        required
-                                    />
-                                </div>
-        
-                                {/* User Name  */}
-                                <div className="form-control md:w-1/2 mx-auto">
-                                    <label className="label">
-                                        <span className="label-text font-bold">User Name</span>
-                                    </label>
-                                    <input
-                                        type="Text"
-                                        name="name"
-                                        value={user.displayName}
-                                        placeholder="User Name"
-                                        className="input input-bordered w-full"
-                                        required
-                                    />
-                                </div>
-        
-                                {/* User Name  */}
-                                <div className="form-control md:w-1/2 mx-auto">
-                                    <label className="label">
-                                        <span className="label-text font-bold">User Mail</span>
-                                    </label>
-                                    <input
-                                        type="Email"
-                                        name="email"
-                                        value={user.email}
-                                        placeholder="Email"
-                                        className="input input-bordered w-full"
-                                        required
-                                    />
-                                </div>
                             </div>
         
                             {/* End of Labels */}
