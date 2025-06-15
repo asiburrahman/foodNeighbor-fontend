@@ -26,7 +26,7 @@ const AddFood = () => {
         console.log(userData);
 
 
-        fetch('https://foodsharing-ce4a2.web.app/task', {
+        fetch('https://food-neighbor-backend.vercel.app/task', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

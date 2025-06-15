@@ -40,7 +40,7 @@ const UpdateTask = () => {
             return alert("Don't Try This")
         }
 
-        fetch(`https://foodsharing-ce4a2.web.app/UpdateTask/${loadFood._id}`, {
+        fetch(`https://food-neighbor-backend.vercel.app/UpdateTask/${loadFood._id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'

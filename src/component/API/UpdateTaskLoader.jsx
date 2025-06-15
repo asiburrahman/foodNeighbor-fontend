@@ -13,7 +13,7 @@ const [task, setTask] = useState([]);
   useEffect(() => {
     
 
-    fetch(`https://foodsharing-ce4a2.web.app/taskDetail/${id}`, {
+    fetch(`https://food-neighbor-backend.vercel.app/taskDetail/${id}`, {
       headers: {
         Authorization: `Bearer ${user.accessToken}`,
       },

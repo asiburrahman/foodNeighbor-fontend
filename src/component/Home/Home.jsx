@@ -17,7 +17,7 @@ const Home = () => {
 
 
             useEffect(() => {
-  axios('https://foodsharing-ce4a2.web.app/recentTasks')
+  axios('https://food-neighbor-backend.vercel.app/recentTasks')
     .then(data => setFoods(data.data));
 }, []);
     
