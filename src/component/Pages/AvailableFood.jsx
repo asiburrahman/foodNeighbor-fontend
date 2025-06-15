@@ -7,7 +7,7 @@ const AvailableFood = ({food}) => {
         <div className="max-w-sm rounded-xl bg-base-300 overflow-hidden shadow-lg border">
               {/* Top image with heart icon */}
               <div className="relative">
-                <Link to={`/FoodDetails/${food._id}`} className="absolute top-3 right-3 bg-white rounded-full p-2 shadow-md hover:bg-red-100">
+                <Link to={`/FoodDetails/${food._id}`} className="absolute top-3 right-3 bg-base-100  rounded-full p-2 shadow-md hover:bg-red-100">
                   
                   See Details
                 </Link>
