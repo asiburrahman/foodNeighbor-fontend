@@ -14,15 +14,15 @@ const ReactSweper = () => {
 const card1 = <>
 <div className="relative rounded-xl overflow-hidden group cursor-pointer">
     <img
-      src="/Frelancer.jpg"
+      src="/hungry2.jpg"
       alt="Digital Marketing"
       className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
     />
-    <div className="absolute top-2 right-2 bg-white text-gray-800 text-sm px-3 py-1 rounded-full shadow">
+    {/* <div className="absolute top-2 right-2 bg-white text-gray-800 text-sm px-3 py-1 rounded-full shadow">
       8 listing
-    </div>
+    </div> */}
     <div className="absolute bottom-2 left-2 text-white font-semibold text-lg">
-      Digital Marketing
+      Hungry People
     </div>
   </div>
 
@@ -33,15 +33,15 @@ const card1 = <>
 const card2 = <>
 <div className="relative rounded-xl overflow-hidden group cursor-pointer">
     <img
-      src="/web.jpg"
+      src="/hungry1.jpg"
       alt="Digital Marketing"
       className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
     />
-    <div className="absolute top-2 right-2 bg-white text-gray-800 text-sm px-3 py-1 rounded-full shadow">
+    {/* <div className="absolute top-2 right-2 bg-white text-gray-800 text-sm px-3 py-1 rounded-full shadow">
       50 listing
-    </div>
+    </div> */}
     <div className="absolute bottom-2 left-2 text-white font-semibold text-lg">
-      Web development
+      Hungry People
     </div>
   </div>
 
@@ -50,15 +50,15 @@ const card2 = <>
 const card3 = <>
 <div className="relative rounded-xl overflow-hidden group cursor-pointer">
     <img
-      src="/graphics.jpg"
+      src="/hungry3.jpg"
       alt="Digital Marketing"
       className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
     />
-    <div className="absolute top-2 right-2 bg-white text-gray-800 text-sm px-3 py-1 rounded-full shadow">
+    {/* <div className="absolute top-2 right-2 bg-white text-gray-800 text-sm px-3 py-1 rounded-full shadow">
       40 listing
-    </div>
+    </div> */}
     <div className="absolute bottom-2 left-2 text-white font-semibold text-lg">
-      Graphics Design
+      Hungry People
     </div>
   </div>
 
@@ -68,15 +68,15 @@ const card3 = <>
 const card4 = <>
 <div className="relative rounded-xl overflow-hidden group cursor-pointer">
     <img
-      src="/video.jpg"
+      src="/hungry1.jpg"
       alt="Digital Marketing"
       className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
     />
-    <div className="absolute top-2 right-2 bg-white text-gray-800 text-sm px-3 py-1 rounded-full shadow">
+    {/* <div className="absolute top-2 right-2 bg-white text-gray-800 text-sm px-3 py-1 rounded-full shadow">
       35 listing
-    </div>
+    </div> */}
     <div className="absolute bottom-2 left-2 text-white font-semibold text-lg">
-      Video Editing
+      Hungry People
     </div>
   </div>
 

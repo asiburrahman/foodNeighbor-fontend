@@ -41,7 +41,7 @@ const Home = () => {
 
 
             <h2 className="text-2xl lg:text-4xl font-bold py-3 text-center">
-    Bid The Task Soon</h2>
+    Find a Meal Nearby</h2>
 
     
     

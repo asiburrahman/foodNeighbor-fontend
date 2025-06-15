@@ -28,16 +28,16 @@ const Slider = () => {
 <div className=" flex-1">
 
   <h2 className="text-2xl lg:text-4xl font-bold py-1">
-  Transform Your Freelance Business
+  Share Excess, Spread Kindness
   </h2>
   <p className='w-11/12'>
-  Flourish in a thriving freelance ecosystem dedicated to excellence and limitless opportunities.
+  Don't waste food — share it with those in need near you.
   </p>
   <button className="btn my-4 ">Get Started</button>
 </div>
 
 <div className="flex-1 rounded">
-  <img className='rounded-xl' src="./Frelancer.jpg"  />
+  <img className='rounded-xl' src="./hungry1.jpg"  />
 </div>
 </div>
 
@@ -50,16 +50,16 @@ const Slider3 = <>
 <div className=" flex-1">
 
   <h2 className="text-2xl lg:text-4xl font-bold py-1">
-  Modern Solution for Freelance Marketplace
+  Zero Waste, Full Hearts
   </h2>
   <p className='w-11/12'>
-  Elevate your freelance marketplace with superior design and expertly crafted features, harnessing its full power.
+  Join our mission to reduce food waste and fight hunger — one meal at a time.
   </p>
   <button className="btn my-4 ">Get Started</button>
 </div>
 
 <div className="flex-1 rounded">
-  <img className='rounded-xl' src="./Happy.jpg"  />
+  <img className='rounded-xl' src="./hungry2.jpg"  />
 </div>
 </div>
 
@@ -72,16 +72,16 @@ const Slider2 = <>
 <div className=" flex-1">
 
   <h2 className="text-2xl lg:text-4xl font-bold py-1">
-  Unlock The Potential Of Your Team's Talent.
+  Turn Leftovers into Hope
   </h2>
   <p className='w-11/12'>
-  Flourish in a thriving freelance ecosystem dedicated to excellence and limitless opportunities.
+  Your extra meal could be someone’s only meal today.
   </p>
   <button className="btn my-4 ">Get Started</button>
 </div>
 
 <div className="flex-1 rounded">
-  <img className='rounded-xl' src="./TeamWork.jpg"  />
+  <img className='rounded-xl' src="./hungry3.jpg"  />
 </div>
 </div>
 
