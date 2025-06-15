@@ -9,7 +9,7 @@ import UseRequestApi from '../API/UseRequestApi';
 const MyPostedFood = () => {
     const {user} = use(AuthContext)
     const [tasks, setTask] = useState([])
-    const {MyFood} =UseRequestApi();
+    const {myPostedFood} =UseRequestApi();
  
     
         // MyFood(user.email).then(data=>setTask(data))
@@ -24,7 +24,7 @@ const MyPostedFood = () => {
     //            }).then(res=> res.json()).then(data=>setTask(data)
     //            )
         
-    MyFood(user.email).then(data=>setTask(data))
+    myPostedFood(user.email).then(data=>setTask(data))
                 
             },[])
 
@@ -39,7 +39,7 @@ const MyPostedFood = () => {
                             cancelButtonColor: "#d33",
                             confirmButtonText: "Yes, delete it!"
                         }).then((result) => {
-                            console.log(result.isConfirmed)
+                           
                             if (result.isConfirmed) {
                 
                                 // start deleting the coffee

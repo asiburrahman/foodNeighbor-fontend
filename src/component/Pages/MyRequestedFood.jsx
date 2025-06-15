@@ -9,8 +9,7 @@ import UseRequestApi from '../API/UseRequestApi';
 const MyRequestedFood = () => {
     const { user } = use(AuthContext)
     const [tasks, setTask] = useState([])
-    const { myRequestFood } = UseRequestApi();
-
+    const { myRequestedFood } = UseRequestApi();
 
 
 
@@ -19,11 +18,11 @@ const MyRequestedFood = () => {
 
 
         //  myRequest(user.email, user.accessToken).then(data=>setTask(data))
-        myRequestFood(user.email).then(data => setTask(data))
+        myRequestedFood(user.email).then(data => setTask(data))
 
 
 
-    }, [user])
+    }, [])
     return (
         <div>
             <div className="overflow-x-auto   w-11/12 mx-auto ">

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Slider from '../Slider/Slider';
 import { ToastContainer } from 'react-toastify';
-import TrustedCompanies from '../Pages/TrustedCompanies';
 import CountUp from 'react-countup';
 import TypewriterText from '../Typewriter/TypewriterText';
 import ReactSweper from '../Swiper/ReactSweper';
@@ -129,9 +128,7 @@ const Home = () => {
             </section>
 
 
-            <section>
-                <TrustedCompanies></TrustedCompanies>
-            </section>
+          
            
         </div>
     );

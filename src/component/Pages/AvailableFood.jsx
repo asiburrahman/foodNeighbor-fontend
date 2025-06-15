@@ -15,7 +15,7 @@ const AvailableFood = ({food}) => {
         
               {/* Freelancer info */}
               <div className="p-4">
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center gap-2">
                   <img
                     className="w-8 h-8 rounded-full object-cover"
                     src={food.photoURL}
@@ -24,15 +24,15 @@ const AvailableFood = ({food}) => {
                   <span className="font-semibold ">{food.displayName}</span>
                   <FaCheckCircle className="text-green-500" />
                 </div>
-                <div className='p-3'>
-                  <img className='object-cover rounded-2xl' src={food.foodImage} alt="" />
+                <div className='p-3  flex justify-center '>
+                  <img className='object-contain max-h-52   rounded-2xl' src={food.foodImage} alt="" />
                 </div>
         
                 
                 {/* Food name  */}
                 <div className="flex items-center text-xl font-bold  mt-2">
                   
-                  <span>Food name: {food.foodName}</span>
+                  <span>Food Name: {food.foodName}</span>
                 </div>
              
         

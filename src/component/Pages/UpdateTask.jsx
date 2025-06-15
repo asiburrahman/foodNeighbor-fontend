@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { use, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import { useLoaderData } from 'react-router';
 import { AuthContext } from '../../context/AuthContext';
@@ -11,7 +11,7 @@ const UpdateTask = () => {
     // const {id}= useParams();
     // const {UpdateFood} = UseRequestApi();
     // const [loadFood, setLoadFood] = useState([])
-    // const { user } = useContext(AuthContext)
+     const { user } = use(AuthContext)
 
     const loadFood = useLoaderData();
     
@@ -36,7 +36,9 @@ const UpdateTask = () => {
         const date = startDate?.toLocaleDateString("en-CA");
         const userData = { date, ...data }
         
-
+        if (loadFood.email !== user.email) {
+            return alert("Don't Try This")
+        }
 
         fetch(`http://localhost:3000/UpdateTask/${loadFood._id}`, {
             method: 'PATCH',

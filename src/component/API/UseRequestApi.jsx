@@ -1,25 +1,25 @@
 import React from 'react';
 import UseAxiosToken from '../hooks/UseAxiosToken';
 
-const UseRequestApi = () => {
+const useRequestApi = () => {
   const axiosSecure = UseAxiosToken();
 
-  const myRequestFood = async (email) => {
+  const myRequestedFood = async (email) => {
     const response = await axiosSecure.get(`/requestFood/${email}`);
     return response.data;
   };
 
-  const MyFood = async (email) => {
+  const myPostedFood = async (email) => {
     const response = await axiosSecure.get(`/myPostedFood/${email}`);
     return response.data;
   };
 
-  const UpdateFood = async (email) => {
-    const response = await axiosSecure.get(`/taskDetail/${email}`);
+  const updateFood = async (id) => {
+    const response = await axiosSecure.get(`/taskDetail/${id}`);
     return response.data;
   };
 
-  return { myRequestFood, MyFood, UpdateFood };
+  return { myRequestedFood, myPostedFood, updateFood };
 };
 
-export default UseRequestApi;
+export default useRequestApi;
