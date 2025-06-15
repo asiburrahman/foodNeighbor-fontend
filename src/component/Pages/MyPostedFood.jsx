@@ -1,32 +1,19 @@
-import React, { use, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
-import Loading from '../Loading/Loading';
 import Swal from 'sweetalert2';
-import MyFood from '../API/UseRequestApi';
-import { Link } from 'react-router';
 import UseRequestApi from '../API/UseRequestApi';
+import { Link } from 'react-router';
 
 const MyPostedFood = () => {
-    const {user} = use(AuthContext)
-    const [tasks, setTask] = useState([])
-    const {myPostedFood} =UseRequestApi();
- 
-    
-        // MyFood(user.email).then(data=>setTask(data))
+    const { user } = useContext(AuthContext);
+    const [tasks, setTask] = useState([]);
+    const { myPostedFood } = UseRequestApi();
 
-
-
-    useEffect(()=>{
-                
-    //             // console.log(location);
-    //            fetch(`https://food-neighbor-backend.vercel.app/task/${user.email}`,{
-    //             method:"GET"
-    //            }).then(res=> res.json()).then(data=>setTask(data)
-    //            )
-        
-    myPostedFood(user.email).then(data=>setTask(data))
-                
-            },[])
+    useEffect(() => {
+        if (user?.email) {
+            myPostedFood(user.email).then(data => setTask(data));
+        }
+    }, [user?.email]);
 
             
           const  handleDelete=(id)=>{
@@ -88,7 +75,7 @@ const MyPostedFood = () => {
                     </thead>
                     <tbody>
                         {
-                            tasks.map( (task, index) => <tr>
+                            tasks.map( (task, index) => <tr key={index}>
                             <td>
                                 <div className="flex items-center gap-3">
                                     <div className="avatar">

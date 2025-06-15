@@ -48,7 +48,7 @@ import UpdateTaskLoader from "../component/API/UpdateTaskLoader";
         {
           path:'/availableFood',
           Component: BrowseFood,
-          loader: ()=> fetch('https://food-neighbor-backend.vercel.app/availableFood')
+          // loader: ()=> fetch('https://food-neighbor-backend.vercel.app/availableFood')
         },
 
         {

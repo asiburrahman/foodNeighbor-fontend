@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 const AddFood = () => {
     const [startDate, setStartDate] = useState(new Date());
     const { user } = use(AuthContext)
-    console.log(user);
+    
 
 
 
@@ -23,7 +23,7 @@ const AddFood = () => {
         const photoURL = user.photoURL
         const foodStatus = 'Available'
         const userData = {displayName, email, photoURL, foodStatus, date, ...data }
-        console.log(userData);
+        
 
 
         fetch('https://food-neighbor-backend.vercel.app/task', {
