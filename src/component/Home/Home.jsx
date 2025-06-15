@@ -17,7 +17,7 @@ const Home = () => {
 
 
             useEffect(() => {
-  axios('http://localhost:3000/recentTasks')
+  axios('https://foodsharing-ce4a2.web.app/recentTasks')
     .then(data => setFoods(data.data));
 }, []);
     

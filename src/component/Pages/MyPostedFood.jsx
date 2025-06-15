@@ -19,7 +19,7 @@ const MyPostedFood = () => {
     useEffect(()=>{
                 
     //             // console.log(location);
-    //            fetch(`http://localhost:3000/task/${user.email}`,{
+    //            fetch(`https://foodsharing-ce4a2.web.app/task/${user.email}`,{
     //             method:"GET"
     //            }).then(res=> res.json()).then(data=>setTask(data)
     //            )
@@ -43,7 +43,7 @@ const MyPostedFood = () => {
                             if (result.isConfirmed) {
                 
                                 // start deleting the coffee
-                                fetch(`http://localhost:3000/myTask/${id}`, {
+                                fetch(`https://foodsharing-ce4a2.web.app/myTask/${id}`, {
                                     method: 'DELETE'
                                 })
                                     .then(res => res.json())

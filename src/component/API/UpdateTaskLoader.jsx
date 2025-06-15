@@ -13,7 +13,7 @@ const [task, setTask] = useState([]);
   useEffect(() => {
     
 
-    fetch(`http://localhost:3000/taskDetail/${id}`, {
+    fetch(`https://foodsharing-ce4a2.web.app/taskDetail/${id}`, {
       headers: {
         Authorization: `Bearer ${user.accessToken}`,
       },

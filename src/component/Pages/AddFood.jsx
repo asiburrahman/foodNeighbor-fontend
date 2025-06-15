@@ -26,7 +26,7 @@ const AddFood = () => {
         console.log(userData);
 
 
-        fetch('http://localhost:3000/task', {
+        fetch('https://foodsharing-ce4a2.web.app/task', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

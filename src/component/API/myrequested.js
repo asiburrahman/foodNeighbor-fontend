@@ -1,5 +1,5 @@
 export const myRequest = (id, accessToken) => {
-    return fetch(`http://localhost:3000/taskDetail/${id}`,{
+    return fetch(`https://foodsharing-ce4a2.web.app/taskDetail/${id}`,{
          method:"GET",
         headers:{
             authorization:`Bearer ${accessToken}`

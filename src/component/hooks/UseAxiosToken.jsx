@@ -4,7 +4,7 @@ import { AuthContext } from '../../context/AuthContext';
 
 
 const axiosInstance = axios.create({
-    baseURL: 'http://localhost:3000'
+    baseURL: 'https://foodsharing-ce4a2.web.app'
 })
 const UseAxiosToken = () => {
          const { user, singOutUser } = useContext(AuthContext);

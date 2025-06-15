@@ -48,13 +48,13 @@ import UpdateTaskLoader from "../component/API/UpdateTaskLoader";
         {
           path:'/availableFood',
           Component: BrowseFood,
-          loader: ()=> fetch('http://localhost:3000/availableFood')
+          loader: ()=> fetch('https://foodsharing-ce4a2.web.app/availableFood')
         },
 
         {
           path:'FoodDetails/:id',
           element: <PrivetRoutes><FoodDetails></FoodDetails></PrivetRoutes>,
-          loader: ({params})=> fetch(`http://localhost:3000/FoodDetails/${params.id}`)
+          loader: ({params})=> fetch(`https://foodsharing-ce4a2.web.app/FoodDetails/${params.id}`)
         },
         
         {
@@ -78,7 +78,7 @@ import UpdateTaskLoader from "../component/API/UpdateTaskLoader";
          {
           path:'updateTask/:id',
           element: <PrivetRoutes><UpdateTask ></UpdateTask></PrivetRoutes>,
-          loader: ({params})=> fetch(`http://localhost:3000/taskDetail/${params.id}`)
+          loader: ({params})=> fetch(`https://foodsharing-ce4a2.web.app/taskDetail/${params.id}`)
           // loader: UpdateTaskLoader
         },
 

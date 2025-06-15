@@ -48,7 +48,7 @@ const FoodDetails = () => {
 
     // const updatedBids = [...bids, user.email];
 
-    fetch(`http://localhost:3000/post/${food._id}`, {
+    fetch(`https://foodsharing-ce4a2.web.app/post/${food._id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
