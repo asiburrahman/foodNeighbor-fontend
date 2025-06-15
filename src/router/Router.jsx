@@ -20,6 +20,7 @@ import FoodDetails from "../component/Pages/FoodDetails";
 import MyRequestedFood from "../component/Pages/MyRequestedFood";
 import MyPostedFood from "../component/Pages/MyPostedFood";
 import { AuthContext } from "../context/AuthContext";
+import UpdateTaskLoader from "../component/API/UpdateTaskLoader";
   
   const router = createBrowserRouter([
     
@@ -78,6 +79,7 @@ import { AuthContext } from "../context/AuthContext";
           path:'updateTask/:id',
           element: <PrivetRoutes><UpdateTask ></UpdateTask></PrivetRoutes>,
           loader: ({params})=> fetch(`http://localhost:3000/taskDetail/${params.id}`)
+          // loader: UpdateTaskLoader
         },
 
         

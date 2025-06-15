@@ -1,7 +1,7 @@
 import React from 'react';
 import UseAxiosToken from '../hooks/UseAxiosToken';
 
-const useRequestApi = () => {
+const UseRequestApi = () => {
   const axiosSecure = UseAxiosToken();
 
   const myRequestFood = async (email) => {
@@ -14,7 +14,12 @@ const useRequestApi = () => {
     return response.data;
   };
 
-  return { myRequestFood, MyFood };
+  const UpdateFood = async (email) => {
+    const response = await axiosSecure.get(`/taskDetail/${email}`);
+    return response.data;
+  };
+
+  return { myRequestFood, MyFood, UpdateFood };
 };
 
-export default useRequestApi;
+export default UseRequestApi;

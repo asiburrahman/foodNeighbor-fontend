@@ -4,12 +4,13 @@ import Loading from '../Loading/Loading';
 import Swal from 'sweetalert2';
 import MyFood from '../API/UseRequestApi';
 import { Link } from 'react-router';
-import useRequestApi from '../API/UseRequestApi';
+import UseRequestApi from '../API/UseRequestApi';
 
 const MyPostedFood = () => {
-    const {user, loading, setLoading} = use(AuthContext)
+    const {user} = use(AuthContext)
     const [tasks, setTask] = useState([])
-    const {MyFood} =useRequestApi();
+    const {MyFood} =UseRequestApi();
+ 
     
         // MyFood(user.email).then(data=>setTask(data))
 
@@ -25,7 +26,7 @@ const MyPostedFood = () => {
         
     MyFood(user.email).then(data=>setTask(data))
                 
-            },[user])
+            },[])
 
             
           const  handleDelete=(id)=>{
@@ -50,7 +51,7 @@ const MyPostedFood = () => {
                                         if (data.deletedCount) {
                                             Swal.fire({
                                                 title: "Deleted!",
-                                                text: "Your Coffee has been deleted.",
+                                                text: "Your Food has been deleted.",
                                                 icon: "success"
                                             });
                 
@@ -74,14 +75,14 @@ const MyPostedFood = () => {
 
     return (
         <div>
-            <div className="overflow-x-auto">
-                <table className="table">
+            <div className="overflow-x-auto w-11/12 mx-auto text-center ">
+                <table className="table ">
                     {/* head */}
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Title</th>
-                            <th>Category</th>
+                            <th>Food Name</th>
+                            <th>Food Status</th>
+                            <th>Quantity</th>
                             <th>Deadline</th>
                         </tr>
                     </thead>
@@ -93,24 +94,23 @@ const MyPostedFood = () => {
                                     <div className="avatar">
                                         <div className="mask mask-squircle h-12 w-12">
                                             <img
-                                                src={user.photoURL}
+                                                src={task.foodImage}
                                                 alt="Avatar Tailwind CSS Component" />
                                         </div>
                                     </div>
                                     <div>
-                                        <div className="font-bold">{user.displayName}</div>
-                                        <div className="text-sm opacity-50">United States</div>
+                                        <div className="font-bold">{task.foodName}</div>
+                                        
                                     </div>
                                 </div>
                             </td>
                             <td >
-                                {task.title}
-                                <br />
-                                <span className="badge badge-ghost badge-sm">Rate: {task.budget}$</span>
+                                {task.foodStatus}
+                                
                             </td>
                             
                             <td>
-                                {task.category}
+                                {task.foodQuantity}
                             </td>
                             <td>
                                 {task.date}
@@ -118,42 +118,11 @@ const MyPostedFood = () => {
                             <th className='space-x-2'>
                                 <Link to={`/updateTask/${task._id}`} className="btn  bg-amber-700 hover:bg-amber-50 btn-ghost btn-xs">Update</Link>
                                 <button onClick={()=> handleDelete(task._id)} className="btn  bg-amber-700 hover:bg-amber-50 btn-ghost btn-xs">Delete</button>
-                                <button  className="btn cursor-not-allowed bg-amber-700 hover:bg-amber-50 btn-ghost btn-xs">{task.bidsUser?.length || 0 } Bids</button>
                             </th>
                         </tr>)
                         }
                         
-                        {/* <tr>
-                            <td>
-                                <div className="flex items-center gap-3">
-                                    <div className="avatar">
-                                        <div className="mask mask-squircle h-12 w-12">
-                                            <img
-                                                src={user.photoURL}
-                                                alt="Avatar Tailwind CSS Component" />
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div className="font-bold">{user.displayName}</div>
-                                        <div className="text-sm opacity-50">United States</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                Zemlak, Daniel and Leannon
-                                <br />
-                                <span className="badge badge-ghost badge-sm">Desktop Support Technician</span>
-                            </td>
-                            <td>Purple</td>
-                            <td>
-                                <p>11-11-11</p>
-                            </td>
-                            <th>
-                                <button className="btn btn-ghost btn-xs">details</button>
-                                <button className="btn btn-ghost btn-xs">details</button>
-                                <button className="btn btn-ghost btn-xs">details</button>
-                            </th>
-                        </tr> */}
+                       
                        
                     </tbody>
                     

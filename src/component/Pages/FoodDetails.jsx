@@ -2,10 +2,11 @@ import React, { useContext, useState } from 'react';
 import { FaHeart } from 'react-icons/fa';
 import { AuthContext } from '../../context/AuthContext';
 import Swal from 'sweetalert2';
-import { useLoaderData } from 'react-router';
+import { useLoaderData, useNavigate } from 'react-router';
 
 const FoodDetails = () => {
   const food = useLoaderData();
+  const navigate = useNavigate()
   const { user } = useContext(AuthContext);
   const [email, setEmail] = useState(food.userEmail || []);
   const hasEmail = email.includes(user?.email);
@@ -18,7 +19,7 @@ const FoodDetails = () => {
       return Swal.fire({
         position: "top-end",
         icon: "info",
-        title: "You have already placed a bid",
+        title: "You have already Request the Food",
         showConfirmButton: false,
         timer: 1500
       });
@@ -32,7 +33,7 @@ const FoodDetails = () => {
       return Swal.fire({
         position: "top-end",
         icon: "info",
-        title: "You have already placed a bid",
+        title: "You have already Request the Food",
         showConfirmButton: false,
         timer: 1500
       });
@@ -63,10 +64,11 @@ const FoodDetails = () => {
           Swal.fire({
             position: "top-end",
             icon: "success",
-            title: "Your bid has been submitted",
+            title: "Your request has been successful",
             showConfirmButton: false,
             timer: 1500
           });
+          navigate('/myRequestedFood')
         }
       })
       .catch(err => {
@@ -74,7 +76,7 @@ const FoodDetails = () => {
         Swal.fire({
           icon: "error",
           title: "Oops!",
-          text: "Something went wrong while bidding."
+          text: "Something went wrong while requesting."
         });
       });
   };
@@ -223,7 +225,7 @@ const FoodDetails = () => {
                                             type="text"
                                             name="date"
                                             value={food.date}
-                                            placeholder="Food Quantity"
+                                            placeholder="Expired Date"
                                             className="input input-bordered w-full"
                                             required
                                         />
@@ -258,46 +260,52 @@ const FoodDetails = () => {
           </div>
         </dialog>
         {/* ------------------Modal End---------------------- */}
-
-
-        <div className=" space-y-2 lg:flex items-center justify-between">
-          <span className="text-sm dark:text-gray-600">Date: {food.date}</span>
-          <button
+        <section className="dark:bg-gray-100 dark:text-gray-800">
+	<div className="container flex flex-col justify-center p-6 mx-auto sm:py-12 lg:py-24 lg:flex-row lg:justify-between rounded-2xl">
+		<div className="flex flex-col justify-center p-6 text-center rounded-sm lg:max-w-md xl:max-w-lg lg:text-left">
+			<h1 className="text-5xl font-bold leading-none sm:text-6xl">{food.foodName}
+			
+			</h1>
+			<p className="mt-6  text-lg font-bold"> Pickup Location: <span className='text-secondary'>{food.foodLocation}</span></p>
+			<p className="mt-6  text-lg font-bold"> Notes: <span className='text-secondary'>{food.foodNotes}</span> </p>
+			<p className="mt-6  text-lg font-bold"> Donor Name: <span className='text-secondary'>{food.displayName}</span>  </p>
+			<p className="mt-6  text-lg font-bold"> Donner Email: <span className='text-secondary'>{food.email}</span>  </p>
+			<p className="mt-6  text-lg font-bold"> Food Quantity:< span className='text-secondary'>{food.foodQuantity}</span> </p>
+			<div className="flex mt-5 flex-col space-y-4 sm:items-center sm:justify-center sm:flex-row sm:space-y-0 sm:space-x-4 lg:justify-start">
+			 <button
             onClick={()=>handleFoodRequest()}
-            className={`text-sm lg:text-md font-bold bg-white p-1  lg:p-2 shadow-md flex items-center lg:gap-2 transition-colors ${hasEmail ? 'bg-red-100 cursor-not-allowed' : 'hover:bg-red-100'
+            className={`text-sm lg:text-md font-bold bg-primary text-white border-2 border-gray-500 rounded-2xl p-1  lg:p-2 shadow-md flex items-center lg:gap-2 transition-colors ${hasEmail ? 'bg-red-100 cursor-not-allowed' : 'hover:bg-gray-500' 
               }`}
           >
-            <FaHeart className={hasEmail ? 'text-red-500' : 'text-gray-500'} />
-            {` ${hasEmail ? `Already Bided, your opportunities ${email}`
-              : `You bid for ${email} opportunities`} `}
+            {` ${hasEmail ? `Requested ${email}`
+              : `Request This Food`} `}
 
             {/* task.bidsUser?.length? task.bidsUser?.length : 0 */}
 
 
           </button>
-        </div>
-
-        <div className="mt-3">
-          <a
-            href="#"
-            className="text-2xl md:text-4xl font-bold hover:underline"
-          >
-            {food.category}
-          </a>
-          <p className="mt-2">{food.description}</p>
-        </div>
-
-        <div className=" flex items-center justify-between mt-3">
-          <p className="text-xl font-bold">Rate: ${food.budget}</p>
+      </div>
+		</div>
+		<div className="flex items-center justify-center p-6 mt-8 lg:mt-0 h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128">
+			<img src={food.foodImage} alt="" className="object-contain h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128 rounded-4xl" />
+		</div>
+	</div>
+  <div className=" flex items-center justify-between p-4">
+          <p className="text-xl font-bold">Food Posted By</p>
           <div className="flex items-center">
             <img
-              src="https://source.unsplash.com/50x50/?portrait"
+              src={food.photoURL}
               alt="avatar"
               className="object-cover w-10 h-10 mx-4 rounded-full dark:bg-gray-500"
             />
-            <span className="dark:text-gray-600">{food.name}</span>
+            <span className="dark:text-gray-600">{food.displayName}</span>
           </div>
         </div>
+</section>
+
+
+
+       
       </div>
     </div>
   );

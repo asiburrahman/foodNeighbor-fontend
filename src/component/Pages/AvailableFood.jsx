@@ -39,10 +39,15 @@ const AvailableFood = ({food}) => {
                 {/* Quantity */}
                 <div className="flex items-center text-sm  mt-2">
                   
-                  <span>Quantity: {food.foodQuantity}</span>
+                  <span className='font-semibold text-xl'>Quantity: {food.foodQuantity}</span>
+                </div>
+                {/* Date */}
+                <div className="flex items-center text-sm  mt-2">
+                  
+                  <span>Date: {food.date}</span>
                 </div>
         
-                {/* Price */}
+                {/* Status */}
                 <div className="flex items-center text-sm gap-2 mt-2">
                   
                  <p className='font-semibold'>Food Status: </p> <span className='p-2 rounded-3xl font-bold bg-accent'>{food.foodStatus}</span>
