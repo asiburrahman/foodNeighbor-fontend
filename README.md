@@ -1,43 +1,52 @@
-#### EventNest #####
+#### FoodNeighbor #####
 
-A modern event management platform built with React, Firebase, Tailwind CSS, and DaisyUI, designed to help users discover, manage, and interact with local events like conferences, exhibitions, sports, and workshops.
+FoodNeighbor is a community-driven food sharing platform where individuals can donate or request surplus food, helping reduce food waste and fight hunger locally. A modern FoodNeighbor platform built with React, Firebase, Tailwind CSS, and DaisyUI, nodejs, Expressjs, Mongodb.
 
  Live URL
 
- https://preeminent-platypus-50b78a.netlify.app/
+https://foodsharing-ce4a2.web.app/
 
 
 
 ## Project Purpose
 
-EventNest simplifies the experience of finding and organizing local events. Whether you're hosting or attending, our platform provides a seamless way to connect with communities and stay updated on upcoming happenings.
+- Minimize food waste by connecting food donors and those in need.
+- Empower communities to support each other through food sharing.
+- Provide a simple, secure, and real-time way to give or get meals.
 
 ##  Key Features
 
-1. Firebase authentication (login/signup)
-2. Browse and discover events
-3. Book Reservation
-4. Modern UI using Tailwind CSS & DaisyUI
-5. Carousel integration using Swiper.js
-6. Toast notifications for feedback
-7. Responsive and accessible design
+**User Authentication** (Login/Signup)
+**Add Food Item** (CRUD functionality)
+**Browse Available Food** (with filters/search)
+**Request Food** (submit a request for a listed item)
+**Manage Requests** (approve/reject requests as donor)
+**Sort by Date** (show recent food items first)
+**Food Pickup Location**
+**Dashboard for Donors and Receivers**
+**Dark/Light Theme Toggle** (with DaisyUI)
+**Search by Food Name**
 
 ##  NPM Packages & Dependencies Used
 
 
-{
-  "tailwindcss/vite": "^4.1.4",
-  "firebase": "^11.6.1",
-  "react": "^19.0.0",
-  "react-dom": "^19.0.0",
-  "react-icons": "^5.5.0",
-  "react-router": "^7.5.2",
-  "react-toastify": "^11.0.5",
-  "swiper": "^11.2.6",
-  "tailwindcss": "^4.1.4"
-  "react-icons": "^5.5.0",
-  "react-countup": "^6.5.3",
-}
+### 🔧 Backend
+- **Express.js**
+- **MongoDB** (with native driver)
+- **Cors**
+- **Dotenv**
+- **Nodemon**
+
+### 💻 Frontend
+- **React**
+- **React Router DOM**
+- **Tailwind CSS**
+- **DaisyUI**
+- **React Hook Form**
+- **SweetAlert2**
+- **Axios**
+- **React Icons**
+- **Moment.js** (for date formatting)
 
 
 
