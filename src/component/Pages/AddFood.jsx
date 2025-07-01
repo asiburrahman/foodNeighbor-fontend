@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 const AddFood = () => {
     const [startDate, setStartDate] = useState(new Date());
     const { user } = use(AuthContext)
-    
+
 
 
 
@@ -18,12 +18,14 @@ const AddFood = () => {
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
         const date = startDate.toLocaleDateString("en-CA");
+        const foodQuantity = parseInt(data.foodQuantity)
+        const { foodQuantity: _, ...restData } = data;
         const displayName = user.displayName
         const email = user.email
         const photoURL = user.photoURL
         const foodStatus = 'Available'
-        const userData = {displayName, email, photoURL, foodStatus, date, ...data }
-        
+        const userData = { displayName, email, photoURL, foodStatus, date, foodQuantity, ...restData }
+
 
 
         fetch('https://food-neighbor-backend.vercel.app/task', {
@@ -73,7 +75,7 @@ const AddFood = () => {
                                 required
                             />
                         </div>
-                         <div className="form-control md:w-1/2 mx-auto">
+                        <div className="form-control md:w-1/2 mx-auto">
                             <label className="label">
                                 <span className="label-text font-bold">Food Image</span>
                             </label>

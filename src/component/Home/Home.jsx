@@ -8,6 +8,9 @@ import Food from '../Pages/Food';
 import axios from 'axios';
 import { Link } from 'react-router';
 import SocialImpact from '../Pages/SocialImpact';
+import Impact from '../Pages/Impact';
+import HomeHowItWorks from '../Pages/HomeHowItWorks';
+import CallAction from '../Pages/CallAction';
 
 
 const Home = () => {
@@ -46,7 +49,7 @@ const Home = () => {
     
     
     
-            <div className='grid justify-items-stretch  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+            <div className='grid justify-items-center  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
                 {/* Added Task Soon */}
 
 
@@ -56,24 +59,28 @@ const Home = () => {
             
             </div>
             <div className='p-4 mt-6 w-7/12 mx-auto text-center'>
-                  <Link to='availableFood' className=" bg-white rounded-full text-xl font-medium p-4 shadow-md hover:bg-base-300">
+                  <Link to='availableFood' className="btn btn-primary rounded-full text-xl font-medium p-4  shadow-md ">
           
           Show All Food
         </Link>
             </div>
-                   
-            <section>
 
-
-              {/* card slider section  */}
-              <section className='p-1 py-10 mt-10'>
+                <section className='p-1 py-10'>
                 <ReactSweper></ReactSweper>
               </section>
               {/* Social Impact Section  */}
-              <section className='p-1 py-10 mt-10'>
+              <section className='p-1 py-10 '>
                 <SocialImpact></SocialImpact>
               </section>
-            <div className="bg-white py-16 px-6 md:px-12 lg:px-24">
+              <section className='p-1 py-10'>
+                <HomeHowItWorks></HomeHowItWorks>
+              </section>
+            <section className='p-1 py-10'>
+
+
+              {/* card slider section  */}
+           
+            <div className="bg-white py-16  px-6 md:px-12 lg:px-24">
       <div className="grid lg:grid-cols-2 gap-12 items-center">
         {/* Left Side - Images */}
         <div className="relative space-y-4">
@@ -125,6 +132,14 @@ const Home = () => {
         </div>
       </div>
     </div>
+            </section>
+
+            <section className='p-1 py-10'>
+              <Impact></Impact>
+            </section>
+
+            <section className='p-1 py-10'>
+              <CallAction></CallAction>
             </section>
 
 

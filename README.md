@@ -1,71 +1,178 @@
-#### FoodNeighbor #####
 
-FoodNeighbor is a community-driven food sharing platform where individuals can donate or request surplus food, helping reduce food waste and fight hunger locally. A modern FoodNeighbor platform built with React, Firebase, Tailwind CSS, and DaisyUI, nodejs, Expressjs, Mongodb.
+# 🥗 FoodNeighbor
 
- Live URL
+**FoodNeighbor** is a modern community-powered food sharing platform built with **React**, **Firebase**, **MongoDB**, and **Express.js**, styled using **Tailwind CSS** and **DaisyUI** — enabling individuals to donate or request extra food responsibly and securely.
 
-https://foodsharing-ce4a2.web.app/
+🌍 **Live Demo:** [https://foodsharing-ce4a2.web.app/](https://foodsharing-ce4a2.web.app/)
 
+---
 
+## 🚀 Project Overview
 
-## Project Purpose
+FoodNeighbor connects local donors with individuals or families in need of meals. With an easy-to-use interface, real-time updates, and secure request management, the platform helps reduce food waste and fight hunger — one meal at a time.
 
-- Minimize food waste by connecting food donors and those in need.
-- Empower communities to support each other through food sharing.
-- Provide a simple, secure, and real-time way to give or get meals.
+---
 
-##  Key Features
+## 🎯 Core Features
 
-**User Authentication** (Login/Signup)
-**Add Food Item** (CRUD functionality)
-**Browse Available Food** (with filters/search)
-**Request Food** (submit a request for a listed item)
-**Manage Requests** (approve/reject requests as donor)
-**Sort by Date** (show recent food items first)
-**Food Pickup Location**
-**Dashboard for Donors and Receivers**
-**Dark/Light Theme Toggle** (with DaisyUI)
-**Search by Food Name**
+✅ **Firebase Authentication** — Login/signup using Email or Google  
+🍱 **Add & Manage Food Items** — Create, edit, or delete food listings  
+📋 **Available Food Listing** — Filter/search by food name  
+🔒 **AxiosSecure Integration** — Secure API communication  
+📨 **Request Food** — One request per item, approved by donors  
+📊 **User Dashboards** — Donors and requesters get personalized views  
+📅 **Sorted by Date** — Lists most recent food first  
+📍 **Pickup Info** — Location, time, and donor contact  
+🌘 **Dark Mode** — Toggle via DaisyUI theme  
+📲 **Fully Responsive** — Optimized for mobile and desktop  
+📢 **Toast & Alerts** — Toastify + SweetAlert2 for feedback  
 
-##  NPM Packages & Dependencies Used
+---
 
+## 📁 Folder Structure
 
-### 🔧 Backend
-- **Express.js**
-- **MongoDB** (with native driver)
-- **Cors**
-- **Dotenv**
-- **Nodemon**
+```
+├── backend/
+│   ├── index.js
+│   └── .env
+├── frontend/
+│   ├── src/
+│   │   ├── assets/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── context/AuthContext.jsx
+│   │   ├── firebase/config.js
+│   │   ├── hooks/useAxiosSecure.js
+│   │   └── App.jsx
+└── README.md
+```
 
-### 💻 Frontend
-- **React**
-- **React Router DOM**
-- **Tailwind CSS**
-- **DaisyUI**
-- **React Hook Form**
-- **SweetAlert2**
-- **Axios**
-- **React Icons**
-- **Moment.js** (for date formatting)
+---
 
+## 📦 NPM Packages Used
 
+### 🔹 Frontend
 
+```json
+"react": "^19.0.0",
+"react-dom": "^19.0.0",
+"react-router-dom": "^7.5.2",
+"firebase": "^11.6.1",
+"tailwindcss": "^4.1.7",
+"daisyui": "^5.0.28",
+"axios": "^1.6.0",
+"react-toastify": "^11.0.5",
+"react-hook-form": "^7.45.1",
+"sweetalert2": "^11.10.0",
+"react-icons": "^5.5.0",
+"swiper": "^11.2.6",
+"react-countup": "^6.5.3"
+```
 
+### 🔹 Backend
 
+```json
+"express": "^5.1.0",
+"cors": "^2.8.5",
+"dotenv": "^16.5.0",
+"mongodb": "^6.16.0"
+```
 
+---
 
-# React + Vite
+## 🔧 Installation & Setup
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### 🔹 Backend Setup
 
-Currently, two official plugins are available:
+```bash
+cd backend
+npm install
+```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Create a `.env` file:
+```ini
+DB_USER=your_db_user
+DB_PASS=your_db_pass
+PORT=3000
+```
 
-## Expanding the ESLint configuration
+Run the server:
+```bash
+node index.js
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
 
+### 🔹 Frontend Setup
 
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
+Create a `.env` file:
+```ini
+VITE_FIREBASE_API_KEY=your_api_key
+VITE_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+VITE_FIREBASE_PROJECT_ID=your_project_id
+VITE_FIREBASE_STORAGE_BUCKET=your_project_bucket
+VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+VITE_FIREBASE_APP_ID=your_app_id
+```
+
+---
+
+## 🌐 API Endpoints
+
+| Method | Endpoint               | Description                          |
+|--------|------------------------|--------------------------------------|
+| GET    | `/availableFood`       | Get all available food items         |
+| GET    | `/foodDetail/:id`      | Get details of a single food item    |
+| POST   | `/food`                | Add a new food listing               |
+| DELETE | `/deleteFood/:id`      | Delete a food listing                |
+| GET    | `/myRequests/:email`   | View all requests by user email      |
+| POST   | `/request`             | Send a request for food              |
+| PATCH  | `/approveRequest/:id`  | Approve a food request               |
+
+---
+
+## 🖼️ Screenshots
+
+📌 *Replace with real images*
+
+- 🏠 **Home Page**
+- 🍱 **Add Food Form**
+- 📋 **Available Food List**
+- 📨 **Request Form**
+- 📊 **Dashboard View**
+
+---
+
+## 💡 Future Improvements
+
+- 📍 **Google Maps Integration** — for better pickup coordination  
+- ⏰ **Auto-expiry Timer** — for perishable food listings  
+- 🌐 **Language Toggle** — English ↔ বাংলা  
+- 📥 **Email/SMS Notifications** — for food status updates
+
+---
+
+## 👨‍💻 Author
+
+**Asibur Rahman**  
+Senior IT Officer, Shishir Knitting & Dyeing (AD Group)  
+📧 [asiburrahman.dev@gmail.com](mailto:asiburrahman.dev@gmail.com)  
+🌐 [LinkedIn](https://www.linkedin.com/in/asiburrahman)
+
+---
+
+## 📜 License
+
+Licensed under the **MIT License**
+
+---
+
+## ⭐️ Show Your Support
+
+If you like this project, please **star ⭐ the repository**, share it with others, and consider contributing!

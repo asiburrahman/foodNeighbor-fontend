@@ -82,7 +82,7 @@ const FoodDetails = () => {
   };
 
   return (
-    <div className="dark:text-gray-800 my-10">
+    <div className=" my-10">
       <div className="w-11/12 px-10 py-6 mx-auto rounded-lg shadow-sm bg-gray-50">
 
 
@@ -253,7 +253,7 @@ const FoodDetails = () => {
                                 <input
                                     type="submit"
                                     value="Request"
-                                    className="btn w-full bg-pink-500 text-white mt-6"
+                                    className="btn w-full bg-primary text-white mt-6"
                                 />
                             </form>
          
@@ -269,7 +269,7 @@ const FoodDetails = () => {
 			<p className="mt-6  text-lg font-bold"> Pickup Location: <span className='text-secondary'>{food.foodLocation}</span></p>
 			<p className="mt-6  text-lg font-bold"> Notes: <span className='text-secondary'>{food.foodNotes}</span> </p>
 			<p className="mt-6  text-lg font-bold"> Donor Name: <span className='text-secondary'>{food.displayName}</span>  </p>
-			<p className="mt-6  text-lg font-bold"> Donner Email: <span className='text-secondary'>{food.email}</span>  </p>
+			<p className="mt-6  text-lg font-bold"> Donor Email: <span className='text-secondary'>{food.email}</span>  </p>
 			<p className="mt-6  text-lg font-bold"> Food Quantity:< span className='text-secondary'>{food.foodQuantity}</span> </p>
 			<div className="flex mt-5 flex-col space-y-4 sm:items-center sm:justify-center sm:flex-row sm:space-y-0 sm:space-x-4 lg:justify-start">
 			 <button

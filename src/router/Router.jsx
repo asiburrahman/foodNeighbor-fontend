@@ -21,6 +21,10 @@ import MyRequestedFood from "../component/Pages/MyRequestedFood";
 import MyPostedFood from "../component/Pages/MyPostedFood";
 import { AuthContext } from "../context/AuthContext";
 import UpdateTaskLoader from "../component/API/UpdateTaskLoader";
+import Contact from "../component/Pages/Contact";
+import About from "../component/Pages/About";
+import DashboardLayout from "../lyout/DashboardLayout";
+import Dashboard from "../component/Dashboard/Dashboard";
   
   const router = createBrowserRouter([
     
@@ -50,42 +54,72 @@ import UpdateTaskLoader from "../component/API/UpdateTaskLoader";
           Component: BrowseFood,
           // loader: ()=> fetch('https://food-neighbor-backend.vercel.app/availableFood')
         },
-
-        {
-          path:'FoodDetails/:id',
+         {
+          path:'/FoodDetails/:id',
           element: <PrivetRoutes><FoodDetails></FoodDetails></PrivetRoutes>,
           loader: ({params})=> fetch(`https://food-neighbor-backend.vercel.app/FoodDetails/${params.id}`)
         },
         
+
+       
         {
-          path: '/addFood',
+          path: '/contact',
+          Component: Contact
+    
+        },
+        {
+          path: '/about',
+          Component: About
+    
+        },
+         
+
+        
+      ]
+
+    },
+    {
+      path: "/dashboard",
+      element: <PrivetRoutes><DashboardLayout></DashboardLayout></PrivetRoutes>,
+      errorElement: <Error></Error>,
+      children:[
+
+        {
+          index: true,
+          Component: Dashboard,
+          // loader: ()=> fetch('https://food-neighbor-backend.vercel.app/availableFood')
+        },
+
+         {
+          path:'/dashboard/availableFood',
+          Component: BrowseFood,
+          // loader: ()=> fetch('https://food-neighbor-backend.vercel.app/availableFood')
+        },
+        
+        {
+          path: '/dashboard/addFood',
           element: <PrivetRoutes><AddFood></AddFood></PrivetRoutes>
         },
 
         {
-          path: '/myRequestedFood',
+          path: '/dashboard/myRequestedFood',
           element: <PrivetRoutes><MyRequestedFood></MyRequestedFood></PrivetRoutes>,
           
           
         },
 
         {
-          path: '/myPostedFood',
+          path: '/dashboard/myPostedFood',
           element: <PrivetRoutes><MyPostedFood></MyPostedFood></PrivetRoutes>,
-          
-          
+    
         },
-         {
-          path:'updateTask/:id',
+        {
+          path:'/dashboard/updateTask/:id',
           element: <PrivetRoutes><UpdateTask ></UpdateTask></PrivetRoutes>,
           loader: ({params})=> fetch(`https://food-neighbor-backend.vercel.app/taskDetail/${params.id}`)
           // loader: UpdateTaskLoader
         },
-
-        
-      ]
-
-    },
+      ]}
     
    
   ]);

@@ -55,17 +55,15 @@ const Footer = () => {
 
         <footer className="bg-base-300 text-base-content text-center px-4 py-10 md:px-10 md:py-16 rounded-t-[500px]">
             <h2 className="text-md md:text-4xl font-bold mb-6">Food<span className=' text-accent'>Neighbor</span></h2>
-            <button className="btn btn-secondary text-white font-bold rounded-full px-8 py-2 mb-8">
+            <button className="btn btn-primary font-bold rounded-full px-8 py-2 mb-8">
                 Get in touch
             </button>
             <div className="border-t border-base-content/30 md:w-2xl mx-auto mb-6"></div>
             <div className="flex flex-wrap justify-center gap-6 text-sm md:text-base">
-                <a href="#" className="hover:underline">Our Story</a>
-                <a href="#" className="hover:underline">Our Impact</a>
-                <a href="#" className="hover:underline">Meet the Team</a>
-                <a href="#" className="hover:underline">Careers</a>
-                <a href="#" className="hover:underline">Press and Awards</a>
-                <a href="#" className="hover:underline">Food Safety T&amp;Cs</a>
+                <Link to='/'>Home</Link>
+                <Link to='/availableFood'>Available Food</Link>
+                <Link to='/about'>About Us</Link>
+                <Link to='/contact'>Contact</Link>
             </div>
       
 

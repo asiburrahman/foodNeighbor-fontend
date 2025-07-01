@@ -90,7 +90,7 @@ const location = useLocation()
     toast.error(showErr)
   }
     return (
-    <div className="card bg-base-100 mt-20 w-full mx-auto max-w-sm shrink-0 shadow-2xl">
+    <div className="card min-h-11/10 bg-base-100 mt-20 w-full mx-auto max-w-sm shrink-0 shadow-2xl">
       <ToastContainer /> 
       <div className="card-body">
       <h1 className="text-2xl font-bold text-center">Login now!</h1>
