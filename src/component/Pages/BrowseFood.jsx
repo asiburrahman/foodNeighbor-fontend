@@ -1,69 +1,56 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import AvailableFood from './AvailableFood';
 
 const BrowseFood = () => {
-  const [foods, setFoods] = useState([]);
   const [search, setSearch] = useState('');
+  const [sortOrder, setSortOrder] = useState('desc');
   const [layoutToggle, setLayoutToggle] = useState(false);
-  const [sortOrder, setSortOrder] = useState('desc'); // Default: High to Low
 
-  useEffect(() => {
-    axios(
-      `https://food-neighbor-backend.vercel.app/availableFood?searchParams=${search}&sort=${sortOrder}`
-    )
-      .then(res => setFoods(res.data))
-      .catch(err => console.error('Error fetching food:', err));
-  }, [search, sortOrder]);
+  // Load data with TanStack Query
+  const { data: foods = [], isLoading } = useQuery({
+    queryKey: ['availableFood', search, sortOrder],
+    queryFn: async () => {
+      const res = await axios.get(
+        `https://food-neighbor-backend.vercel.app/availableFood?searchParams=${search}&sort=${sortOrder}`
+      );
+      return res.data;
+    },
+  });
 
   return (
-    <div className="w-11/12 max-w-7xl min-h-[80vh] mx-auto py-8 px-4 sm:px-0">
-      {/* 🔍 Filters and Controls */}
-      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-center mb-8">
-        {/* Search Input */}
-        <label className="input input-bordered flex items-center gap-2 w-full">
-          <input
-            type="text"
-            name="search"
-            onChange={(e) => setSearch(e.target.value)}
-            className="grow w-full"
-            placeholder="Search food name..."
-          />
-          <svg
-            className="w-4 h-4 opacity-50 flex-shrink-0"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <circle cx="11" cy="11" r="7" />
-            <line x1="21" y1="21" x2="16.65" y2="16.65" />
-          </svg>
-        </label>
+    <div className="w-11/12 max-w-7xl mx-auto py-6 min-h-[80vh]">
+      {/* Filter Section */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 items-center mb-6">
+        {/* Search */}
+        <input
+          type="text"
+          placeholder="Search food name..."
+          onChange={(e) => setSearch(e.target.value)}
+          className="input input-bordered w-full"
+        />
 
-        {/* Sort Select */}
+        {/* Sort */}
         <select
-          className="select select-bordered "
-          onChange={(e) => setSortOrder(e.target.value)}
+          className="select select-bordered w-full"
           value={sortOrder}
+          onChange={(e) => setSortOrder(e.target.value)}
         >
-          <option className='text-xs md:text-sm ' value="desc">Quantity: High to Low</option>
-          <option className='text-xs md:text-sm ' value="asc">Quantity: Low to High</option>
+          <option value="desc">Quantity: High to Low</option>
+          <option value="asc">Quantity: Low to High</option>
         </select>
 
-        {/* Layout Toggle Button */}
+        {/* Toggle Layout */}
         <button
           onClick={() => setLayoutToggle(!layoutToggle)}
           className="btn btn-primary w-full"
-          type="button"
         >
           Toggle Layout
         </button>
       </div>
 
-      {/* 🍱 Food Cards Grid */}
+      {/* Food List */}
       <div
         className={`grid gap-6 ${
           layoutToggle
@@ -71,12 +58,12 @@ const BrowseFood = () => {
             : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
         } justify-items-center`}
       >
-        {foods.length > 0 ? (
-          foods.map((food, index) => (
-            <AvailableFood key={index} food={food} />
-          ))
+        {isLoading ? (
+          <p className="text-center text-gray-400 col-span-full">Loading...</p>
+        ) : foods.length > 0 ? (
+          foods.map((food, i) => <AvailableFood key={i} food={food} />)
         ) : (
-          <p className="text-center col-span-full text-gray-400">No food found.</p>
+          <p className="text-center text-gray-400 col-span-full">No food found.</p>
         )}
       </div>
     </div>

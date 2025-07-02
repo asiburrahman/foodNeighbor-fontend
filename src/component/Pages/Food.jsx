@@ -95,7 +95,7 @@ const Food = ({ food }) => {
           <p>Date: {food.date}</p>
           <div className="flex items-center gap-2">
             <span className="font-semibold">Food Status:</span>
-            <span className="btn btn-primary btn-xs rounded-full px-4">
+            <span className={`btn ${food.foodStatus==='Requested'?'btn-secondary':'btn-primary'} btn-xs rounded-full px-4`}>
               {food.foodStatus}
             </span>
           </div>

@@ -58,19 +58,19 @@ const Navbar = () => {
                 </div>
                 <ul
                     tabIndex={0}
-                    className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                    className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow font-semibold">
                   {link}
                 </ul>
                 </div>
                 <div className='flex items-center justify-center gap-2'>
-                  <img className='w-10 h-10 rounded-full hidden md:inline-block ' src='/Food.jpg' alt="" />
-                  <Link to='/' className="text-sm font-bold   md:text-2xl lg:text-3xl">Food<span className=' text-accent'>Neighbor</span></Link> 
+                  <img className='w-8 h-8 rounded-full hidden md:inline-block ' src='/Food.jpg' alt="" />
+                  <Link to='/' className="text-sm font-bold   md:text-xl lg:text-2xl">Food<span className=' text-accent'>Neighbor</span></Link> 
                   
                 </div>
                 
             </div>
             <div className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal px-1">
+                <ul className="menu menu-horizontal gap-1 font-semibold">
                 {link}
                 </ul>
             </div>
@@ -78,7 +78,7 @@ const Navbar = () => {
             <div className="navbar-end">
 
                  {
-                !user && <Link className='hover:bg-gray-400 px-2 p-2 md:px-4  rounded' to="/register">Sign Up </Link>
+                !user && <Link className='hover:bg-gray-400  p-2 md:px-2  rounded' to="/register">Sign Up </Link>
                }
 
                
@@ -106,7 +106,7 @@ const Navbar = () => {
                     /* <img title={user.displayName} className='w-10 h-10 rounded-full' src={user.photoURL} alt="" />
                 <a onClick={handleSignOut} className="btn border-none  ">Sign Out </a>
                 </div>  */
-                 : <Link className='hover:bg-gray-400 p-2 px-2 md:px-4 rounded' to="/login">Login </Link>
+                 : <Link className='hover:bg-gray-400 p-2 px-2 md:px-2 rounded' to="/login">Login </Link>
                  
 
                } 

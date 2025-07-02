@@ -1,21 +1,27 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { AuthContext } from '../../context/AuthContext';
-import { Link } from 'react-router';
-import UseRequestApi from '../API/UseRequestApi';
+import UseAxiosToken from '../hooks/UseAxiosToken';
+import Loading from '../Loading/Loading';
+
 
 const MyRequestedFood = () => {
   const { user } = useContext(AuthContext);
-  const [tasks, setTask] = useState([]);
-  const { myRequestedFood } = UseRequestApi();
+const axiosInstance = UseAxiosToken()
+  const { data: tasks = [], isLoading, isError } = useQuery({
+    queryKey: ['myRequestedFood', user?.email],
+    queryFn: async () => {
+      const res = await axiosInstance.get(`/requestFood/${user?.email}`);
+      return res.data;
+    },
+    enabled: !!user?.email, // only run if email exists
+  });
 
-  useEffect(() => {
-    if (user?.email) {
-      myRequestedFood(user.email).then(data => setTask(data));
-    }
-  }, [user?.email]);
+  if (isLoading) return <Loading></Loading>;
+  if (isError) return <p className="text-center my-10 text-red-500">Failed to load data.</p>;
 
   return (
-    <div className="overflow-x-auto w-11/12 mx-auto">
+    <div className="overflow-x-auto w-11/12 mx-auto mt-6">
       <table className="table w-full">
         <thead>
           <tr>

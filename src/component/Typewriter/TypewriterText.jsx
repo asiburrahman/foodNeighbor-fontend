@@ -15,7 +15,8 @@ const TypewriterText = () => {
       <h1 className='text-xl lg:text-5xl font-bold text-shadow-2xl' style={{  margin: 'auto 0', fontWeight: 'normal' }}>
         Welcome to {' '}
         <span
-          style={{ color: 'red', fontWeight: 'bold' }}
+          style={{  fontWeight: 'bold' }}
+          className='text-accent'
           aria-live="polite"
         >
           <Typewriter
