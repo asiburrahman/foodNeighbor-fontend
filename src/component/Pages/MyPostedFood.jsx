@@ -11,7 +11,7 @@ const MyPostedFood = () => {
     const axiosInstance = UseAxiosToken()
 
 
-    const { data: tasks = [], isLoading, isError } = useQuery({
+    const { data: tasks = [], isLoading, isError, refetch, } = useQuery({
         queryKey: ['myPostedFood', user?.email],
         
         queryFn: async () => {
@@ -50,8 +50,7 @@ const MyPostedFood = () => {
                             });
 
                             // remove the coffee from the state
-                            const remainingTasks = tasks.filter(task => task._id !== id);
-                            setTask(remainingTasks);
+                            refetch();
                         }
                     })
 
@@ -110,7 +109,7 @@ const MyPostedFood = () => {
                                     {task.date}
                                 </td>
                                 <th className='space-x-2'>
-                                    <Link to={`/updateTask/${task._id}`} className="btn  bg-amber-700 hover:bg-amber-50 btn-ghost btn-xs">Update</Link>
+                                    <Link to={`/dashboard/updateTask/${task._id}`} className="btn  bg-amber-700 hover:bg-amber-50 btn-ghost btn-xs">Update</Link>
                                     <button onClick={() => handleDelete(task._id)} className="btn  bg-amber-700 hover:bg-amber-50 btn-ghost btn-xs">Delete</button>
                                 </th>
                             </tr>)
