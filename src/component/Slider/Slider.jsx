@@ -103,7 +103,7 @@ const Slider2 = <>
       modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
       spaceBetween={50}
       slidesPerView={1}
-      navigation
+      
       pagination={{ clickable: true }}
       
       // onSwiper={(swiper) => }
