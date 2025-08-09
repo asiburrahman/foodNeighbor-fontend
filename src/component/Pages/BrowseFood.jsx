@@ -20,7 +20,7 @@ const BrowseFood = () => {
   });
 
   return (
-    <div className="w-11/12 max-w-7xl mx-auto py-6 min-h-[80vh]">
+    <div className="w-11/12  mx-auto py-6 min-h-[80vh]">
       {/* Filter Section */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 items-center mb-6">
         {/* Search */}
@@ -55,7 +55,7 @@ const BrowseFood = () => {
         className={`grid gap-6 ${
           layoutToggle
             ? 'grid-cols-1 sm:grid-cols-2'
-            : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
+            : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'
         } justify-items-center`}
       >
         {isLoading ? (
