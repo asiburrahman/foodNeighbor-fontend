@@ -5,7 +5,7 @@ import {
   
   import React, { Children, Component, use } from "react";
   import ReactDOM from "react-dom/client";
-import Root from "../lyout/Root";
+import Root from "../layout/Root";
 import Home from "../component/Home/Home";
 import Login from "../component/Login/Login";
 import Register from "../component/Register/Register";
@@ -23,7 +23,7 @@ import { AuthContext } from "../context/AuthContext";
 import UpdateTaskLoader from "../component/API/UpdateTaskLoader";
 import Contact from "../component/Pages/Contact";
 import About from "../component/Pages/About";
-import DashboardLayout from "../lyout/DashboardLayout";
+import DashboardLayout from "../layout/DashboardLayout";
 import Dashboard from "../component/Dashboard/Dashboard";
   
   const router = createBrowserRouter([
