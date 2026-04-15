@@ -3,6 +3,8 @@ import UseRequestApi from './UseRequestApi';
 import { AuthContext } from '../../context/AuthContext';
 
 
+const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+
 const UpdateTaskLoader = ({params}) => {
     const {id}= params
     const {user} = use(AuthContext)
@@ -13,14 +15,14 @@ const [task, setTask] = useState([]);
   useEffect(() => {
     
 
-    fetch(`https://food-neighbor-backend.vercel.app/taskDetail/${id}`, {
+    fetch(`${baseUrl}/taskDetail/${id}`, {
       headers: {
         Authorization: `Bearer ${user.accessToken}`,
       },
     })
       .then(res => res.json())
       .then(data => setTask(data));
-  }, [id]);
+  }, [id, user.accessToken]);
 
     console.log(task);
     

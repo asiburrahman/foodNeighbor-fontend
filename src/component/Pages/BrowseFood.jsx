@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+import UseAxiosToken from '../hooks/UseAxiosToken';
 import AvailableFood from './AvailableFood';
 
 const BrowseFood = () => {
+  const axiosInstance = UseAxiosToken();
   const [search, setSearch] = useState('');
   const [sortOrder, setSortOrder] = useState('desc');
   const [layoutToggle, setLayoutToggle] = useState(false);
@@ -12,8 +13,8 @@ const BrowseFood = () => {
   const { data: foods = [], isLoading } = useQuery({
     queryKey: ['availableFood', search, sortOrder],
     queryFn: async () => {
-      const res = await axios.get(
-        `https://food-neighbor-backend.vercel.app/availableFood?searchParams=${search}&sort=${sortOrder}`
+      const res = await axiosInstance.get(
+        `/availableFood?searchParams=${search}&sort=${sortOrder}`
       );
       return res.data;
     },

@@ -1,157 +1,148 @@
-// import { createUserWithEmailAndPassword } from 'firebase/auth';
 import React, { use, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router';
 import { AuthContext } from '../../context/AuthContext';
-import { toast } from 'react-toastify';
-import { FaEye } from "react-icons/fa";
-import { FaEyeSlash } from "react-icons/fa";
-import { ToastContainer } from 'react-toastify'
+import { toast, ToastContainer } from 'react-toastify';
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import axios from 'axios';
 import 'react-toastify/dist/ReactToastify.css';
-// import { auth } from '../../firebase.init';
 
 const Register = () => {
   const userInfo = use(AuthContext)
   const [showPassword, setShowPassword] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
-  const { googleSignin,createUser, updateUserProfile, setUser, user, } = userInfo
+  const { googleSignin, createUser, updateUserProfile, setUser, } = userInfo
+  
+  // OTP Verification States
+  const [step, setStep] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [otp, setOtp] = useState('');
+  const [registrationData, setRegistrationData] = useState(null);
 
+  const handleRegisterInitial = async (e) => {
+    e.preventDefault()
+    const name = e.target.name.value
+    const photoUrl = e.target.photoUrl.value
+    const email = e.target.mail.value
+    const password = e.target.password.value
 
-    const handleRegister = (e)=>{
-        e.preventDefault()
-        // const name = e.target.name.value
-        const name = e.target.name.value
-        const photoUrl = e.target.photoUrl.value
-        const email = e.target.mail.value
-        const password = e.target.password.value
-         console.log(name, photoUrl, email, password);
+    setErrorMessage('')
 
-         setErrorMessage('')
-
-         const passwordCheker = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/
-
-         if (passwordCheker.test(password)=== false) {
-          setErrorMessage("Password must have one lowercase, one uppercase, one digit and 6 characters or longer")
-          
-          return;
-         }
-
-         
-         
-         
-        //password Authentication
-       
-       
-        // createUserWithEmailAndPassword(auth, email, password).then(result=>{
-        //   console.log(result);
-          
-        // }).catch(error=>{
-        //   console.log(error);
-          
-        // })
-        createUser(email, password).then(result=>{
-            // console.log(result);
-            const userinfo = result.user
-            updateUserProfile( name, photoUrl ).then(() => {
-
-              setUser({...userinfo, name, photoUrl})
-              console.log(userinfo);
-              toast.success("User Create Successful!!");
-              // setUser({...user, displayName: name, photoURL: photoUrl})
-              // console.log(user);
-              
-              
-            }).catch((error) => {
-
-            
-              setErrorMessage(error.message );
-             setUser(userinfo)
-             
-            });
-          
-            
-          }).catch(error=>{
-            setErrorMessage(error.message );
-            
-            
-          })
-
-       
-        
+    const passwordCheker = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/
+    if (passwordCheker.test(password) === false) {
+      setErrorMessage("Password must have one lowercase, one uppercase, one digit and 6 characters or longer")
+      return;
     }
 
-    if (errorMessage) {
-      toast.error(errorMessage);
+    setRegistrationData({ name, photoUrl, email, password });
+    setLoading(true);
+
+    try {
+      // Temporarily hit local backend for the dev server
+      // Before pushing to production, you may want to change this to your deployed backend URL.
+      await axios.post('http://localhost:3000/send-otp', { email });
+      toast.success("OTP sent to your email!");
+      setStep(2); // Move to OTP input step
+    } catch (error) {
+      setErrorMessage(error.response?.data?.message || "Failed to send OTP. Is your backend running on localhost:3000 and configured?");
+    } finally {
+      setLoading(false);
     }
+  }
 
-    const handleGoogleSignin=()=>{
+  const handleVerifyOTPAndRegister = async (e) => {
+    e.preventDefault();
+    setErrorMessage('');
+    setLoading(true);
 
-      setErrorMessage('')
-      googleSignin().then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        // const credential = GoogleAuthProvider.credentialFromResult(result);
-        // const token = credential.accessToken;
-        // The signed-in user info.
-        const user = result.user;
-        // console.log(user);
-        setUser(user)
-  
-        // navigate(location?.state || '/')
-        toast.success("User Login Successfully By Google");
-        
-        // IdP data available using getAdditionalUserInfo(result)
-        // ...
-      }).catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        setErrorMessage(errorCode);
-        const errorMessage = error.message;
-  
-        setErrorMessage(errorMessage);
-        // The email of the user's account used.
-        const email = error.customData.email;
-        setErrorMessage(email);
-        // The AuthCredential type that was used.
-        const credential = <GoogleAuthProvider></GoogleAuthProvider>;
-        setErrorMessage(credential);
-        // ...
+    try {
+      // 1. Verify OTP
+      await axios.post('http://localhost:3000/verify-otp', {
+        email: registrationData.email,
+        otp: otp
       });
-    }
-  
-   
-    return (
-        <div className="card bg-base-100 mt-20 w-full mx-auto max-w-sm shrink-0 shadow-2xl">
-           <ToastContainer /> 
-      <div className="card-body">
-      <h1 className="text-2xl font-bold text-center">Register now!</h1>
-        <form onSubmit={handleRegister} className="fieldset">
-          <label className="label">User Name</label>
-          <input required type="text" className="input" name='name' placeholder="User Name" />
-          <label className="label" >User Photo URL</label>
-          <input required type="text" className="input" name='photoUrl' placeholder="User Photo Url" />
-          <label className="label" >Email</label>
-          <input required type="email" className="input" name='mail' placeholder="Email" />
-          <label className="label">Password</label>
-          <div className='relative'>
-            <input required type={showPassword?"text":"password"} className="input" name='password' placeholder="Password" />
-            <button onClick={(e)=> {e.preventDefault(), setShowPassword(!showPassword)}} className='btn btn-xs absolute top-2 right-6'>{showPassword? <FaEye />: <FaEyeSlash />} </button>
-          </div>
-          
-          {/* (?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,} */}
-          <button className="btn btn-neutral mt-4">Register</button>
-        </form>
 
-                <div className=' text-md font-bold text-center text-emerald-300'>Login With Google</div>
-                  <button onClick={handleGoogleSignin} className="btn bg-emerald-300 mt-1">Google Login</button>
-          
-        <p>If You Already Have Account  <NavLink className='text-blue-400' to='/login'>Please Login</NavLink> </p>
-        {errorMessage && <p className='text-red-600 font-bold pt-1'>{errorMessage}</p>
-        
-        }
-       
-      </div>
+      // 2. If OTP valid, Register via Firebase
+      const result = await createUser(registrationData.email, registrationData.password);
+      const userinfo = result.user;
       
+      await updateUserProfile(registrationData.name, registrationData.photoUrl);
+      // Ensure we use the exact field names (photoURL) that Firebase uses
+      setUser({ ...userinfo, displayName: registrationData.name, photoURL: registrationData.photoUrl });
+      
+      toast.success("Registration Successful!");
+      setStep(1); 
+      navigate('/availableFood') 
+    } catch (error) {
+      setErrorMessage(error.response?.data?.message || error.message || "OTP Verification Failed");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  const handleGoogleSignin = () => {
+    setErrorMessage('')
+    googleSignin().then((result) => {
+      const user = result.user;
+      setUser(user)
+      toast.success("User Login Successfully By Google");
+    }).catch((error) => {
+      setErrorMessage(error.message);
+    });
+  }
+
+  return (
+    <div className="card bg-base-100 mt-20 w-full mx-auto max-w-sm shrink-0 shadow-2xl premium-shadow">
+      <ToastContainer /> 
+      <div className="card-body">
+        <h1 className="text-2xl font-bold text-center text-gradient">Register</h1>
+        
+        {step === 1 ? (
+          <>
+            <form onSubmit={handleRegisterInitial} className="fieldset">
+              <label className="label">User Name</label>
+              <input required type="text" className="input" name='name' placeholder="User Name" />
+              <label className="label" >User Photo URL</label>
+              <input required type="text" className="input" name='photoUrl' placeholder="User Photo Url" />
+              <label className="label" >Email</label>
+              <input required type="email" className="input" name='mail' placeholder="Email" />
+              <label className="label">Password</label>
+              <div className='relative'>
+                <input required type={showPassword ? "text" : "password"} className="input w-full" name='password' placeholder="Password" />
+                <button type="button" onClick={() => setShowPassword(!showPassword)} className='btn btn-xs absolute top-2 right-4'>
+                  {showPassword ? <FaEye /> : <FaEyeSlash />} 
+                </button>
+              </div>
+              <button disabled={loading} className="btn btn-primary text-white mt-4 premium-shadow hover:-translate-y-1">
+                {loading ? "Sending..." : "Send Verification OTP"}
+              </button>
+            </form>
+
+            <div className="divider">OR</div>
+            <button onClick={handleGoogleSignin} className="btn btn-outline hover:bg-emerald-50 mt-1 w-full text-emerald-600 border-emerald-300">
+              Continue with Google
+            </button>
+            <p className="mt-4 text-sm text-center">Already have an account? <NavLink className='text-primary font-semibold' to='/login'>Login</NavLink></p>
+          </>
+        ) : (
+          <>
+            <form onSubmit={handleVerifyOTPAndRegister} className="fieldset">
+              <label className="label">Enter 6-Digit OTP</label>
+              <p className="text-xs text-gray-500 mb-2">Code sent to: <span className="font-semibold">{registrationData?.email}</span></p>
+              <input required type="text" className="input text-center text-xl tracking-widest" value={otp} onChange={(e) => setOtp(e.target.value)} placeholder="000000" maxLength={6} />
+              
+              <button disabled={loading} className="btn btn-primary text-white mt-4 premium-shadow hover:-translate-y-1">
+                {loading ? "Verifying..." : "Verify & Register"}
+              </button>
+              
+              <button type="button" onClick={() => setStep(1)} className="btn btn-ghost mt-2 opacity-60">Back</button>
+            </form>
+          </>
+        )}
+
+        {errorMessage && <p className='text-red-600 font-bold text-sm text-center pt-2'>{errorMessage}</p>}
+      </div>
     </div>
-    );
+  );
 };
 
 export default Register;

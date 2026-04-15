@@ -36,20 +36,17 @@ const MyPostedFood = () => {
 
             if (result.isConfirmed) {
 
-                // start deleting the coffee
-                fetch(`https://food-neighbor-backend.vercel.app/myTask/${id}`, {
-                    method: 'DELETE'
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.deletedCount) {
+                // start deleting
+                axiosInstance.delete(`/myTask/${id}`)
+                    .then(res => {
+                        if (res.data.deletedCount) {
                             Swal.fire({
                                 title: "Deleted!",
                                 text: "Your Food has been deleted.",
                                 icon: "success"
                             });
 
-                            // remove the coffee from the state
+                            // refetch data
                             refetch();
                         }
                     })

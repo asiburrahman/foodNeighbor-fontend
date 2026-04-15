@@ -7,11 +7,11 @@ import Swal from 'sweetalert2';
 import UseRequestApi from '../API/UseRequestApi';
 // import { myRequest } from '../API/myrequested';
 
+import UseAxiosToken from '../hooks/UseAxiosToken';
+
 const UpdateTask = () => {
-    // const {id}= useParams();
-    // const {UpdateFood} = UseRequestApi();
-    // const [loadFood, setLoadFood] = useState([])
      const { user } = use(AuthContext)
+     const axiosInstance = UseAxiosToken();
 
     const loadFood = useLoaderData();
     
@@ -40,16 +40,9 @@ const UpdateTask = () => {
             return alert("Don't Try This")
         }
 
-        fetch(`https://food-neighbor-backend.vercel.app/UpdateTask/${loadFood._id}`, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(userData)
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.modifiedCount > 0) {
+        axiosInstance.patch(`/updateTask/${loadFood._id}`, userData)
+            .then(res => {
+                if (res.data.modifiedCount > 0) {
                     Swal.fire({
                         position: "top-end",
                         icon: "success",

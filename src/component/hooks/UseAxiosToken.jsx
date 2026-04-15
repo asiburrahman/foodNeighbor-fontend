@@ -4,7 +4,7 @@ import { AuthContext } from '../../context/AuthContext';
 
 
 const axiosInstance = axios.create({
-    baseURL: 'https://food-neighbor-backend.vercel.app'
+    baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3000'
 })
 const UseAxiosToken = () => {
          const { user, singOutUser } = useContext(AuthContext);

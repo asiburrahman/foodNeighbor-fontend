@@ -20,10 +20,7 @@ const location = useLocation()
     setShowErr('')
     singInUser(email, password).then((result) => {
       toast.success("User Sign in Successful!!");
-      // console.log("login successfully");
-      
-      //  navigate(location?.state || '/')
-      
+      navigate(location?.state?.from?.pathname || '/')
     })
     .catch((error) => {
       setShowErr(error.message);

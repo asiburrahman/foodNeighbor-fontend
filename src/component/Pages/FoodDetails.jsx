@@ -1,12 +1,14 @@
 import React, { useContext, useState } from 'react';
-import { FaHeart } from 'react-icons/fa';
+import { FaHeart, FaMapMarkerAlt, FaCalendarAlt, FaStickyNote, FaUser, FaWeightHanging } from 'react-icons/fa';
 import { AuthContext } from '../../context/AuthContext';
 import Swal from 'sweetalert2';
 import { useLoaderData, useNavigate } from 'react-router';
+import UseAxiosToken from '../hooks/UseAxiosToken';
 
 const FoodDetails = () => {
   const food = useLoaderData();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const axiosInstance = UseAxiosToken();
   const { user } = useContext(AuthContext);
   const [email, setEmail] = useState(food.userEmail || []);
   const hasEmail = email.includes(user?.email);
@@ -40,27 +42,31 @@ const FoodDetails = () => {
     }
     e.preventDefault();
     const form = e.target;
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData.entries());
-        data.foodStatus = "Requested"
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+    
+    const reqQty = parseInt(data.foodQuantity, 10);
+    const availQty = parseInt(food.foodQuantity, 10);
+    
+    if (reqQty > availQty) {
+      return Swal.fire({
+        icon: "error",
+        title: "Oops!",
+        text: `You can only request up to ${availQty} items.`
+      });
+    }
+
+    data.foodStatus = "Requested"
        
         
 
     // const updatedBids = [...bids, user.email];
 
-    fetch(`https://food-neighbor-backend.vercel.app/post/${food._id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.modifiedCount > 0) {
-          console.log(data);
-          
-          setEmail(user.email);
+    data.foodStatus = "Requested";
+
+    axiosInstance.put(`/post/${food._id}`, data)
+      .then(res => {
+        if (res.data.modifiedCount > 0 || res.data.insertedId) {
           Swal.fire({
             position: "top-end",
             icon: "success",
@@ -68,15 +74,15 @@ const FoodDetails = () => {
             showConfirmButton: false,
             timer: 1500
           });
-          navigate('/myRequestedFood')
+          navigate('/dashboard/myRequestedFood');
         }
       })
       .catch(err => {
-        console.error("Bid error:", err);
+        console.error("Request error:", err);
         Swal.fire({
           icon: "error",
           title: "Oops!",
-          text: "Something went wrong while requesting."
+          text: err.response?.data?.message || "Something went wrong while requesting."
         });
       });
   };
@@ -114,31 +120,31 @@ const FoodDetails = () => {
                                             required
                                         />
                                     </div>
-                                     <div className="form-control md:w-4/5 mx-auto">
+                                    <div className="form-control md:w-4/5 mx-auto">
                                         <label className="label">
-                                            <span className="label-text font-bold">Food Image</span>
+                                            <span className="label-text font-bold flex items-center gap-2"><FaUser /> Food Image URL</span>
                                         </label>
                                         <input
                                             type="text"
                                             name="foodImage"
                                             value={food.foodImage}
-                                            placeholder="Food Image"
-                                            className="input input-bordered w-full"
+                                            readOnly
+                                            className="input input-bordered w-full bg-gray-100"
                                             required
                                         />
                                     </div>
             
-                                    {/* Quantity  */}
                                     <div className="form-control md:w-4/5 mx-auto">
                                         <label className="label">
-                                            <span className="label-text font-bold">Food Quantity</span>
+                                            <span className="label-text font-bold flex items-center gap-2"><FaWeightHanging /> Request Quantity (Max: {food.foodQuantity})</span>
                                         </label>
                                         <input
-                                            type="text"
+                                            type="number"
                                             name="foodQuantity"
-                                            value={food.foodQuantity}
-                                            placeholder="Food Quantity"
-                                            className="input input-bordered w-full"
+                                            defaultValue={food.foodQuantity}
+                                            max={food.foodQuantity}
+                                            min="1"
+                                            className="input input-bordered w-full border-primary focus:ring-2 focus:ring-primary"
                                             required
                                         />
                                     </div>

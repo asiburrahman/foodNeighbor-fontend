@@ -11,18 +11,19 @@ import SocialImpact from '../Pages/SocialImpact';
 import Impact from '../Pages/Impact';
 import HomeHowItWorks from '../Pages/HomeHowItWorks';
 import CallAction from '../Pages/CallAction';
+import UseAxiosToken from '../hooks/UseAxiosToken';
 
 
 const Home = () => {
-
+    const axiosInstance = UseAxiosToken();
     const [foods, setFoods] = useState([])
 // console.log(tasks);
 
 
             useEffect(() => {
-  axios('https://food-neighbor-backend.vercel.app/recentTasks')
+  axiosInstance.get('/recentTasks')
     .then(data => setFoods(data.data));
-}, []);
+}, [axiosInstance]);
     
     return (
         

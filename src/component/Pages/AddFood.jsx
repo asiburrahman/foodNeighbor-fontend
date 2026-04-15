@@ -4,10 +4,12 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { AuthContext } from '../../context/AuthContext';
 import Swal from 'sweetalert2';
+import UseAxiosToken from '../hooks/UseAxiosToken';
 
 const AddFood = () => {
     const [startDate, setStartDate] = useState(new Date());
-    const { user } = use(AuthContext)
+    const { user } = use(AuthContext);
+    const axiosInstance = UseAxiosToken();
 
 
 
@@ -26,28 +28,27 @@ const AddFood = () => {
         const foodStatus = 'Available'
         const userData = { displayName, email, photoURL, foodStatus, date, foodQuantity, ...restData }
 
-
-
-        fetch('https://food-neighbor-backend.vercel.app/task', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(userData)
-        }).then(res => res.json()).then(data => {
-            if (data.insertedId) {
-
+        axiosInstance.post('/task', userData)
+            .then(res => {
+                if (res.data.insertedId) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Your Food has been added successfully",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    form.reset();
+                }
+            })
+            .catch(err => {
+                console.error(err);
                 Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "Your Task has been saved",
-                    showConfirmButton: false,
-                    timer: 1500
+                    icon: "error",
+                    title: "Oops!",
+                    text: "Something went wrong while adding food."
                 });
-
-                form.reset()
-            }
-        })
+            });
 
     };
 

@@ -25,6 +25,8 @@ import Contact from "../component/Pages/Contact";
 import About from "../component/Pages/About";
 import DashboardLayout from "../layout/DashboardLayout";
 import Dashboard from "../component/Dashboard/Dashboard";
+
+const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000';
   
   const router = createBrowserRouter([
     
@@ -57,7 +59,7 @@ import Dashboard from "../component/Dashboard/Dashboard";
          {
           path:'/FoodDetails/:id',
           element: <PrivetRoutes><FoodDetails></FoodDetails></PrivetRoutes>,
-          loader: ({params})=> fetch(`https://food-neighbor-backend.vercel.app/FoodDetails/${params.id}`)
+          loader: ({params})=> fetch(`${baseUrl}/FoodDetails/${params.id}`)
         },
         
 
@@ -116,7 +118,7 @@ import Dashboard from "../component/Dashboard/Dashboard";
         {
           path:'/dashboard/updateTask/:id',
           element: <PrivetRoutes><UpdateTask ></UpdateTask></PrivetRoutes>,
-          loader: ({params})=> fetch(`https://food-neighbor-backend.vercel.app/taskDetail/${params.id}`)
+          loader: ({params})=> fetch(`${baseUrl}/taskDetail/${params.id}`)
           // loader: UpdateTaskLoader
         },
       ]}
