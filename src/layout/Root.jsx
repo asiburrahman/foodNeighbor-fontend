@@ -4,6 +4,7 @@ import Navbar from '../component/Navbar/Navbar';
 import Footer from '../component/Footer/Footer';
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import ScrollToTop from '../component/ScrollToTop';
 
 const Root = () => {
     const location = useLocation();
@@ -22,7 +23,8 @@ const Root = () => {
 
     return (
         <>
-        {/* <ToastContainer /> */}
+            <ScrollToTop />
+            {/* <ToastContainer /> */}
         <Navbar> </Navbar>
          <Outlet></Outlet>
           <Footer></Footer>

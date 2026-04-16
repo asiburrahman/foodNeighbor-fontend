@@ -47,7 +47,7 @@ const Home = () => {
 
                     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center'>
                       {
-                        foods.map((food)=> <Food food={food} key={food._id}></Food>)
+                        Array.isArray(foods) && foods.map((food)=> <Food food={food} key={food._id}></Food>)
                       }
                     </div>
 

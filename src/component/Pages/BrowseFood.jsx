@@ -78,7 +78,7 @@ const BrowseFood = () => {
               <span className="loading loading-spinner loading-lg text-primary"></span>
               <p className="text-base-content/40 font-bold tracking-widest uppercase text-xs">Cooking up results...</p>
           </div>
-        ) : foods.length > 0 ? (
+        ) : Array.isArray(foods) && foods.length > 0 ? (
           foods.map((food) => <Food key={food._id} food={food} />)
         ) : (
           <div className="col-span-full py-20 text-center">

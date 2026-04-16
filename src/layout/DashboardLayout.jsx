@@ -8,10 +8,12 @@ import {
   FaHandshake,
   FaTachometerAlt,
 } from 'react-icons/fa';
+import ScrollToTop from '../component/ScrollToTop';
 
 const DashboardLayout = () => {
   return (
     <div className="drawer lg:drawer-open">
+      <ScrollToTop />
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col">
         {/* Navbar */}
