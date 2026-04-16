@@ -8,6 +8,7 @@ import UseRequestApi from '../API/UseRequestApi';
 // import { myRequest } from '../API/myrequested';
 
 import UseAxiosToken from '../hooks/UseAxiosToken';
+import { imageUpload } from '../../utils/imageUpload';
 
 const UpdateTask = () => {
      const { user } = use(AuthContext)
@@ -25,42 +26,54 @@ const UpdateTask = () => {
     //                 console.log(loadFood);
 
 
+    const [loading, setLoading] = useState(false);
     const [startDate, setStartDate] = useState(new Date(loadFood.date))
 
-    const handleUpdateTask = (e) => {
+    const handleUpdateTask = async (e) => {
 
         e.preventDefault();
+        setLoading(true);
         const form = e.target;
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData.entries());
-        const date = startDate?.toLocaleDateString("en-CA");
-        const userData = { date, ...data }
-        
-        if (loadFood.email !== user.email) {
-            return alert("Don't Try This")
-        }
+        const foodImageFile = form.foodImage.files[0];
 
-        axiosInstance.patch(`/updateTask/${loadFood._id}`, userData)
-            .then(res => {
-                if (res.data.modifiedCount > 0) {
-                    Swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: "Your Update has been successful",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                    
-                }
-            })
-            .catch(err => {
-                console.error("Bid error:", err);
+        try {
+            let foodImage = loadFood.foodImage;
+
+            if (foodImageFile) {
+                foodImage = await imageUpload(foodImageFile);
+            }
+
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+            const date = startDate?.toLocaleDateString("en-CA");
+            const { foodImage: _, ...otherData } = data;
+            const userData = { date, foodImage, ...otherData }
+
+            if (loadFood.email !== user.email) {
+                setLoading(false);
+                return alert("Don't Try This")
+            }
+
+            const res = await axiosInstance.patch(`/updateTask/${loadFood._id}`, userData);
+            if (res.data.modifiedCount > 0) {
                 Swal.fire({
-                    icon: "error",
-                    title: "Oops!",
-                    text: "Something went wrong while requesting."
+                    position: "top-end",
+                    icon: "success",
+                    title: "Your Update has been successful",
+                    showConfirmButton: false,
+                    timer: 1500
                 });
+            }
+        } catch (err) {
+            console.error("Update error:", err);
+            Swal.fire({
+                icon: "error",
+                title: "Oops!",
+                text: err.message || "Something went wrong while updating."
             });
+        } finally {
+            setLoading(false);
+        }
 
     }
 
@@ -97,22 +110,22 @@ const UpdateTask = () => {
                         <label className="label">
                             <span className="label-text font-bold">Food Image</span>
                         </label>
-                        {/* <textarea
-                                        type="text"
-                                        name="description"
-                                        placeholder="Description"
-                                        className="input input-bordered w-full h-20"
-                                        defaultValue={loadUser.description}
-                                        required
-                                    /> */}
-                        <input
-                            type="url"
-                            name="foodImage"
-                            placeholder="Food Image URL"
-                            className="input input-bordered w-full"
-                            defaultValue={loadFood.foodImage}
-                            required
-                        />
+                        <div className="flex flex-col gap-2">
+                            {loadFood.foodImage && (
+                                <div className="avatar">
+                                    <div className="w-20 rounded">
+                                        <img src={loadFood.foodImage} alt="Current Food" />
+                                    </div>
+                                </div>
+                            )}
+                            <input
+                                type="file"
+                                name="foodImage"
+                                accept="image/*"
+                                className="file-input file-input-bordered w-full"
+                            />
+                            <p className="text-xs text-gray-500">Leave blank to keep existing photo.</p>
+                        </div>
                     </div>
 
                     {/* Food Quantity  */}
@@ -180,11 +193,20 @@ const UpdateTask = () => {
                 </div>
 
                 {/* End of Labels */}
-                <input
+                <button
                     type="submit"
-                    value="Update"
+                    disabled={loading}
                     className="btn w-full bg-pink-500 text-white mt-6"
-                />
+                >
+                    {loading ? (
+                        <span className="flex items-center gap-2">
+                            <span className="loading loading-spinner"></span>
+                            Updating...
+                        </span>
+                    ) : (
+                        "Update"
+                    )}
+                </button>
             </form>
 
         </div>

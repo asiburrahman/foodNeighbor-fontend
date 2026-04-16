@@ -5,6 +5,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import axios from 'axios';
 import 'react-toastify/dist/ReactToastify.css';
+import { imageUpload } from '../../utils/imageUpload';
 
 const Register = () => {
   const userInfo = use(AuthContext)
@@ -21,7 +22,7 @@ const Register = () => {
   const handleRegisterInitial = async (e) => {
     e.preventDefault()
     const name = e.target.name.value
-    const photoUrl = e.target.photoUrl.value
+    const photoFile = e.target.photo.files[0]
     const email = e.target.mail.value
     const password = e.target.password.value
 
@@ -33,17 +34,27 @@ const Register = () => {
       return;
     }
 
-    setRegistrationData({ name, photoUrl, email, password });
     setLoading(true);
+    const startTime = Date.now();
 
     try {
-      // Temporarily hit local backend for the dev server
-      // Before pushing to production, you may want to change this to your deployed backend URL.
+      // 1. Upload photo to ImgBB
+      const photoUrl = await imageUpload(photoFile);
+      
+      setRegistrationData({ name, photoUrl, email, password });
+
+      // 2. Send OTP
       await axios.post('http://localhost:3000/send-otp', { email });
-      toast.success("OTP sent to your email!");
+      
+      // 3. Ensure at least 3 seconds of loading as requested
+      const elapsedTime = Date.now() - startTime;
+      const waitTime = Math.max(0, 3000 - elapsedTime);
+      await new Promise(resolve => setTimeout(resolve, waitTime));
+
+      toast.success("Photo uploaded and OTP sent to your email!");
       setStep(2); // Move to OTP input step
     } catch (error) {
-      setErrorMessage(error.response?.data?.message || "Failed to send OTP. Is your backend running on localhost:3000 and configured?");
+      setErrorMessage(error.message || "Failed to process registration. Please check your connection and API keys.");
     } finally {
       setLoading(false);
     }
@@ -98,22 +109,33 @@ const Register = () => {
         
         {step === 1 ? (
           <>
-            <form onSubmit={handleRegisterInitial} className="fieldset">
-              <label className="label">User Name</label>
-              <input required type="text" className="input" name='name' placeholder="User Name" />
-              <label className="label" >User Photo URL</label>
-              <input required type="text" className="input" name='photoUrl' placeholder="User Photo Url" />
-              <label className="label" >Email</label>
-              <input required type="email" className="input" name='mail' placeholder="Email" />
-              <label className="label">Password</label>
+            <form onSubmit={handleRegisterInitial} className="flex flex-col gap-2">
+              <label className="label py-1">User Name</label>
+              <input required type="text" className="input input-bordered w-full" name='name' placeholder="User Name" />
+              
+              <label className="label py-1">User Profile Photo</label>
+              <input required type="file" className="file-input file-input-bordered w-full" name='photo' accept="image/*" />
+              
+              <label className="label py-1">Email</label>
+              <input required type="email" className="input input-bordered w-full" name='mail' placeholder="Email" />
+              
+              <label className="label py-1">Password</label>
               <div className='relative'>
-                <input required type={showPassword ? "text" : "password"} className="input w-full" name='password' placeholder="Password" />
-                <button type="button" onClick={() => setShowPassword(!showPassword)} className='btn btn-xs absolute top-2 right-4'>
+                <input required type={showPassword ? "text" : "password"} className="input input-bordered w-full" name='password' placeholder="Password" />
+                <button type="button" onClick={() => setShowPassword(!showPassword)} className='btn btn-ghost btn-xs absolute top-3 right-4 opacity-70'>
                   {showPassword ? <FaEye /> : <FaEyeSlash />} 
                 </button>
               </div>
-              <button disabled={loading} className="btn btn-primary text-white mt-4 premium-shadow hover:-translate-y-1">
-                {loading ? "Sending..." : "Send Verification OTP"}
+              
+              <button disabled={loading} className="btn btn-primary text-white mt-6 premium-shadow hover:-translate-y-1">
+                {loading ? (
+                  <span className="flex items-center gap-2">
+                    <span className="loading loading-spinner loading-sm"></span>
+                    Processing...
+                  </span>
+                ) : (
+                  "Send Verification OTP"
+                )}
               </button>
             </form>
 

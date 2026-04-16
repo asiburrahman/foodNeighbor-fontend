@@ -5,50 +5,60 @@ import "react-datepicker/dist/react-datepicker.css";
 import { AuthContext } from '../../context/AuthContext';
 import Swal from 'sweetalert2';
 import UseAxiosToken from '../hooks/UseAxiosToken';
+import { imageUpload } from '../../utils/imageUpload';
 
 const AddFood = () => {
     const [startDate, setStartDate] = useState(new Date());
+    const [loading, setLoading] = useState(false);
     const { user } = use(AuthContext);
     const axiosInstance = UseAxiosToken();
 
 
 
 
-    const handleAddTask = (e) => {
+    const handleAddTask = async (e) => {
         e.preventDefault();
+        setLoading(true);
         const form = e.target;
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData.entries());
-        const date = startDate.toLocaleDateString("en-CA");
-        const foodQuantity = parseInt(data.foodQuantity)
-        const { foodQuantity: _, ...restData } = data;
-        const displayName = user.displayName
-        const email = user.email
-        const photoURL = user.photoURL
-        const foodStatus = 'Available'
-        const userData = { displayName, email, photoURL, foodStatus, date, foodQuantity, ...restData }
+        const foodImageFile = form.foodImage.files[0];
 
-        axiosInstance.post('/task', userData)
-            .then(res => {
-                if (res.data.insertedId) {
-                    Swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: "Your Food has been added successfully",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                    form.reset();
-                }
-            })
-            .catch(err => {
-                console.error(err);
+        try {
+            // Upload image to ImgBB
+            const foodImage = await imageUpload(foodImageFile);
+
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+            const date = startDate.toLocaleDateString("en-CA");
+            const foodQuantity = parseInt(data.foodQuantity)
+            const { foodQuantity: _, foodImage: __, ...restData } = data;
+            const displayName = user.displayName
+            const email = user.email
+            const photoURL = user.photoURL
+            const foodStatus = 'Available'
+            const userData = { displayName, email, photoURL, foodStatus, date, foodQuantity, foodImage, ...restData }
+
+            const res = await axiosInstance.post('/task', userData);
+            if (res.data.insertedId) {
                 Swal.fire({
-                    icon: "error",
-                    title: "Oops!",
-                    text: "Something went wrong while adding food."
+                    position: "top-end",
+                    icon: "success",
+                    title: "Your Food has been added successfully",
+                    showConfirmButton: false,
+                    timer: 1500
                 });
+                form.reset();
+                setStartDate(new Date());
+            }
+        } catch (err) {
+            console.error(err);
+            Swal.fire({
+                icon: "error",
+                title: "Oops!",
+                text: err.message || "Something went wrong while adding food."
             });
+        } finally {
+            setLoading(false);
+        }
 
     };
 
@@ -81,10 +91,10 @@ const AddFood = () => {
                                 <span className="label-text font-bold">Food Image</span>
                             </label>
                             <input
-                                type="text"
+                                type="file"
                                 name="foodImage"
-                                placeholder="Food Image"
-                                className="input input-bordered w-full"
+                                accept="image/*"
+                                className="file-input file-input-bordered w-full"
                                 required
                             />
                         </div>
@@ -147,11 +157,20 @@ const AddFood = () => {
                     </div>
 
                     {/* End of Labels */}
-                    <input
+                    <button
                         type="submit"
-                        value="Add Food"
+                        disabled={loading}
                         className="btn w-full bg-pink-500 text-white mt-6"
-                    />
+                    >
+                        {loading ? (
+                            <span className="flex items-center gap-2">
+                                <span className="loading loading-spinner"></span>
+                                Processing...
+                            </span>
+                        ) : (
+                            "Add Food"
+                        )}
+                    </button>
                 </form>
             </div>
         </div>

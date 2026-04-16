@@ -47,57 +47,86 @@ const DashboardLayout = () => {
       </div>
 
       {/* Sidebar */}
-      <div className="drawer-side">
+      <div className="drawer-side z-20">
         <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
-        <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4 space-y-2">
-          {/* Logo */}
-          <li className="mb-4">
-            <div className="flex items-center justify-center gap-2">
-              <img className="w-10 h-10 rounded-full" src="/Food.jpg" alt="Logo" />
-              <Link to="/" className="text-sm font-bold md:text-2xl lg:text-3xl">
-                Food<span className="text-accent">Neighbor</span>
-              </Link>
-            </div>
-          </li>
+        <div className="bg-base-100 border-r border-base-200 min-h-full w-72 flex flex-col">
+          {/* Logo Section */}
+          <div className="p-6 border-b border-base-100 mb-4">
+            <Link to="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+              <img className="w-10 h-10 rounded-xl premium-shadow" src="/Food.jpg" alt="Logo" />
+              <span className="text-xl font-bold tracking-tight text-base-content">
+                Food<span className="text-primary font-black">Neighbor</span>
+              </span>
+            </Link>
+          </div>
 
-          {/* Links */}
-          <li>
-            <NavLink to="/">
-              <FaHome className="inline-block mr-2" />
-              Home
-            </NavLink>
-          </li>
+          {/* Navigation Menu */}
+          <ul className="menu menu-md px-4 flex-grow space-y-1">
+            <li className="menu-title text-xs uppercase tracking-wider opacity-40 font-bold mb-2 ml-2 text-base-content">Main Menu</li>
+            
+            <li>
+              <NavLink 
+                to="/dashboard" 
+                end
+                className={({ isActive }) => `flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${isActive ? 'bg-primary/10 text-primary font-bold shadow-sm' : 'hover:bg-base-200 text-base-content/70'}`}
+              >
+                <FaTachometerAlt className="text-lg" />
+                <span>Overview</span>
+              </NavLink>
+            </li>
 
-          
+            <li>
+              <NavLink 
+                to="/dashboard/availableFood" 
+                className={({ isActive }) => `flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${isActive ? 'bg-primary/10 text-primary font-bold shadow-sm' : 'hover:bg-base-200 text-base-content/70'}`}
+              >
+                <FaBoxOpen className="text-lg" />
+                <span>Available Food</span>
+              </NavLink>
+            </li>
 
-          <li>
-            <NavLink to="/dashboard/availableFood">
-              <FaBoxOpen className="inline-block mr-2" />
-              Available Food
-            </NavLink>
-          </li>
+            <li>
+              <NavLink 
+                to="/dashboard/addFood" 
+                className={({ isActive }) => `flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${isActive ? 'bg-primary/10 text-primary font-bold shadow-sm' : 'hover:bg-base-200 text-base-content/70'}`}
+              >
+                <FaPlusCircle className="text-lg" />
+                <span>Add Food</span>
+              </NavLink>
+            </li>
 
-          <li>
-            <NavLink to="/dashboard/addFood">
-              <FaPlusCircle className="inline-block mr-2" />
-              Add Food
-            </NavLink>
-          </li>
+            <li>
+              <NavLink 
+                to="/dashboard/myPostedFood" 
+                className={({ isActive }) => `flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${isActive ? 'bg-primary/10 text-primary font-bold shadow-sm' : 'hover:bg-base-200 text-base-content/70'}`}
+              >
+                <FaUtensils className="text-lg" />
+                <span>My Added Food</span>
+              </NavLink>
+            </li>
 
-          <li>
-            <NavLink to="/dashboard/myPostedFood">
-              <FaUtensils className="inline-block mr-2" />
-              My Added Food
-            </NavLink>
-          </li>
+            <li>
+              <NavLink 
+                to="/dashboard/myRequestedFood" 
+                className={({ isActive }) => `flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${isActive ? 'bg-primary/10 text-primary font-bold shadow-sm' : 'hover:bg-base-200 text-base-content/70'}`}
+              >
+                <FaHandshake className="text-lg" />
+                <span>My Requested Food</span>
+              </NavLink>
+            </li>
+          </ul>
 
-          <li>
-            <NavLink to="/dashboard/myRequestedFood">
-              <FaHandshake className="inline-block mr-2" />
-              My Requested Food
-            </NavLink>
-          </li>
-        </ul>
+          {/* Sidebar Footer */}
+          <div className="p-4 border-t border-base-100 mt-auto">
+            <Link 
+              to="/" 
+              className="flex items-center gap-3 px-4 py-3 text-base-content/70 hover:text-primary transition-colors hover:bg-base-200 rounded-lg"
+            >
+              <FaHome className="text-lg" />
+              <span>Back to Home</span>
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );
