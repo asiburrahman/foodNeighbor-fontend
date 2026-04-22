@@ -25,6 +25,7 @@ import Contact from "../component/Pages/Contact";
 import About from "../component/Pages/About";
 import DashboardLayout from "../layout/DashboardLayout";
 import Dashboard from "../component/Dashboard/Dashboard";
+import ForgotPassword from "../component/Login/ForgotPassword";
 
 const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000';
   
@@ -49,6 +50,10 @@ const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000';
         {
           path: '/register',
           element: <LoginProtectedRouts><Register></Register></LoginProtectedRouts>
+        },
+        {
+          path: '/forgatePassword/:email?',
+          element: <ForgotPassword></ForgotPassword>
         },
 
         {
